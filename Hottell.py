@@ -5,7 +5,7 @@ import tkinter as tk
 from PIL import Image , ImageTk 
 
 
-#  CAI DAT THU  VIEN TRONG PYTHON 
+#  CAI DAT THU  VIEN TRONG PYTHON  csv, pip install imagetk
 # TRY EXPECT
 
 
