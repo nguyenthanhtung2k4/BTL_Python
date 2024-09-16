@@ -1,4 +1,21 @@
 import csv
-#  Cài đặt  môi  trường nếu chưa cài đặt trước
-#  mở termial lên  cài bên dưới: 
-# pip install python-csv
+
+'''
+1.Thêm phòng mới: Thêm thông tin một phòng mới vào hệ thống.
+2.Sửa thông tin phòng: Cập nhật thông tin của một phòng đã tồn tại.
+3.Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
+4.Xem danh sách phòng: Hiển thị danh sách tất cả các phòng và tình trạng của chúng.
+5.Hiện  thị  các phòng trống; 
+6.Sửa thông tin khách hàng: Cập nhật thông tin của một khách hàng đã tồn tại.
+7.Xem danh sách khách hàng: Hiển thị danh sách tất cả các khách hàng.
+8.Đặt phòng mới: Tạo một đơn đặt phòng mới.
+9.Hủy đặt phòng : Hủy một đơn đặt phòng đã tồn tại.
+10.Nhận phòng : Xác nhận khách đã nhận phòng.
+11.Trả phòng: Xác nhận khách đã trả phòng, tính toán số tiền cần thanh toán.
+12.Xem danh sách đặt phòng: Hiển thị danh sách tất cả các đơn đặt phòng.
+13.Thêm nhân viên mới: Thêm thông tin một nhân viên mới vào hệ thống.
+14.Sửa thông tin nhân viên: Cập nhật thông tin của một nhân viên đã tồn tại.
+15.Xóa nhân viên: Xóa thông tin một nhân viên khỏi hệ thống.
+16.Xem danh sách nhân viên: Hiển thị danh sách tất cả các nhân viên.
+17.Xem báo cáo doanh thuHiển thị báo cáo doanh thu chi tiết.
+'''
