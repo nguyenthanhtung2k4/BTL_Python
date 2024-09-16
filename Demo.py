@@ -67,7 +67,7 @@ def menu4(file):
                print(f'  {so}\t\t {loai}\t  {gia}\t {status}')
 
 if __name__ == '__main__':
-     file_phong='D:\CODE\DNU_PYTHON\BTL\BTL_Python\phòng.csv'
+     file_phong='D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
 
 #MENU4 xem tat ca
      if check(file_phong):
