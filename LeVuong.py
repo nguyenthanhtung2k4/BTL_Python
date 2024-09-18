@@ -45,6 +45,7 @@ def CheckOut(fileRoom,fileVisitors):
                 print(f'So tien phai tra sau {Days} ngay la : {sum}$')
 
 
+#3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def DeleteRoom(NumberDel,fileRoom):
     Number=[]
     cost=[]
@@ -63,16 +64,57 @@ def DeleteRoom(NumberDel,fileRoom):
             cost.append(Cost)
             TypeRoom.append(Type)
             status.append(Status)
-                
-        for i in range(0,len(Number),1):
-            print(Number[i])
+    for i in range(0,len(Number)-1,1):
+        if(NumberDel==Number[i]):
+            # print(Number[i],cost[i],TypeRoom[i],status[i])
+            del Number[i]
+            del cost[i]
+            del TypeRoom[i]
+            del status[i]
+    with open(fileRoom,'w',encoding='utf-8') as FileWrite:
+        format=['Số phòng','Loại','Giá','Trạng thái']
+        writer=csv.DictWriter(FileWrite,fieldnames=format) #Lưu thuộc tính vào FileWrite với fieldnames là mảng format
+        writer.writeheader() #thuộc tính này nhằm để lưu lại các fieldnames ở trong file
+        for i in range(0,len(Number)-1,1):
+            Num = Number[i]
+            Type = TypeRoom[i]
+            Cost = cost[i]
+            Status = status[i]
+            # Cho vào for vì là các mảng của dữ liệu, mỗi lần lặp sẽ lại lưu 1 thuộc tính mới
+            writer.writerow({
+                'Số phòng': Num,
+                'Loại': Type,
+                'Giá':Cost,
+                'Trạng thái':Status
+            }) #Lưu thành các cột
 
+
+#Nhận phòng : Xác nhận khách đã nhận phòng.
+def CheckDate(Date_To_Check,Start_Date,End_Date):
+    # Kiểm tra nếu ngày nằm trong khoảng giữa start_date và end_date
+    return Start_Date <= Date_To_Check <= End_Date
+
+def StatusCheck(fileVisitors):
+    
+    with open(fileVisitors,'r',encoding='utf-8') as File:
+        Check = csv.DictReader(File)
+        dateFormat = '%Y-%m-%d'
+        for row in Check:
+            # print(row)
+            DateCheckIn = datetime.strptime(row['NgayDen'],dateFormat)
+            DateCheckOut = datetime.strptime(row['NgayDi'],dateFormat)
+            Date = datetime.now()
+            CheckOrder = datetime.strptime(row['NgayDat'],dateFormat)
+            # print (Date, DateCheckIn,DateCheckOut)
+            if CheckDate(Date, DateCheckIn,DateCheckOut) and CheckOrder:
+                print(True)
+            else:
+                print(False)
 
 def Main():
     fileRoom = 'Phong.csv'
     fileVisitors = 'KhachHang.csv'
     # CheckOut(fileRoom, fileVisitors)
-    DeleteRoom(101,fileRoom)
+    # DeleteRoom(101,fileRoom) #Hàm xoá 1 phần tử
+    StatusCheck(fileVisitors)
 Main();
-
-#3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.

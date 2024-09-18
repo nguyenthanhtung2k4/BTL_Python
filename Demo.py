@@ -1,4 +1,4 @@
-import csv 
+import csv
 import os,sys
 import tkinter as tk
 # from PIL import* #  image , imageTk 
@@ -40,7 +40,7 @@ def add():
      Gia='200'
      status='No'
      ob={
-          'Số phòng':122,
+          'Số phòng':101,
           'Loại':loai,
           'Giá':Gia,
           'Trạng thái':status
