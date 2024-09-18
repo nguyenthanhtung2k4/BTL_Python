@@ -1,4 +1,4 @@
-import csv 
+import csv
 import os,sys
 import tkinter as tk
 # from PIL import* #  image , imageTk 
@@ -40,7 +40,7 @@ def add():
      Gia='200'
      status='No'
      ob={
-          'Số phòng':122,
+          'Số phòng':101,
           'Loại':loai,
           'Giá':Gia,
           'Trạng thái':status
@@ -67,7 +67,7 @@ def menu4(file):
                print(f'  {so}\t\t {loai}\t  {gia}\t {status}')
 
 if __name__ == '__main__':
-     file_phong='D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+     file_phong='Phong.csv'
 
 #MENU4 xem tat ca
      if check(file_phong):
