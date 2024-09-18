@@ -1,0 +1,9 @@
+Thuộc tính : trong file khach.csv
+     SoPhong: số phong
+     TenKhach: Tên khách hàng ( in hoa)
+     Sdt: số điện thoại khách hàng (kiểu int)
+     GiayTo: Giấy tờ tùy thân( kiểu string)
+     NgayDat: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
+     NgayDen: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
+     NgayDi: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
+     StatusCheck: True of  False (True:  đã nhận | False : Lên Lịch)
