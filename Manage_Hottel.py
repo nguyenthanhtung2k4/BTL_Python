@@ -19,8 +19,8 @@ import os
 #17.Xem báo cáo doanh thuHiển thị báo cáo doanh thu chi tiết.
 #7,5,1,14,9,2
 def check(file):
-     if os.path.exists(file):
-          return file
+    if os.path.exists(file):
+        return file
 so=[]
 loai=[]
 gia=[]
