@@ -416,10 +416,10 @@ def error():
     
 if  __name__=='__main__':
 #//// data duong dan chuyen vao
-     file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
-     file_Khach=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
-     file_NhanVien=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\NhanVien.csv'
-     file_Setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'
+     file_phong=r'Phong.csv'
+     file_Khach=r'KhachHang.csv'
+     file_NhanVien=r'NhanVien.csv'
+     file_Setting=r'Setting.json'
 
      fomat_khach=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
      fomat_phong=['Số phòng','Loại','Giá','Trạng thái']
