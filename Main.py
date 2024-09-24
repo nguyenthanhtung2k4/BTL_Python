@@ -8,7 +8,7 @@ import re,json
 #  try expcet cai thu vien pystyle 
 try:
      from pystyle import System
-except:
+except ValueError:
      os.system('pip install pystyle')
      
 '''
