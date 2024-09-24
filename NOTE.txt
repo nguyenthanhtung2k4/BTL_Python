@@ -1,3 +1,16 @@
+Việc cần làm:
+          Kết hợp lại cả các file code lại với nhau
+          Xây dựng nốt Setting (time,color)
+          
+          Chạy  thử nghiệm các code.
+
+
+
+
+
+
+
+
 Thuộc tính : trong file khach.csv
      SoPhong: số phong
      TenKhach: Tên khách hàng ( in hoa)
