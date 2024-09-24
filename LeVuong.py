@@ -69,6 +69,21 @@ def menu11(fileRoom,fileVisitors):
                     print(f"Phòng {RoomNumber} không tồn tại.")
                     # print(False)
                     return
+    with open(fileVisitors,'w',encoding='utf-8') as f:
+        WriteF = csv.DictWriter(f,fieldnames=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck'])
+        WriteF.writeheader()
+        for i in range(len(Number)):
+            obj={
+                'SoPhong':Number[i],
+                'TenKhach':Name[i],
+                'Sdt':PhoneNumber[i],
+                'GiayTo':Info[i],
+                'NgayDat':DateTakeRoom[i].strftime('%Y-%m-%d'),
+                'NgayDen':DateCheckIn[i].strftime('%Y-%m-%d'),
+                'NgayDi':DateCheckOut[i].strftime('%Y-%m-%d'),
+                'StatusCheck':Status_Visitors[i]
+            }
+            WriteF.writerow(obj)
 
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
@@ -336,7 +351,7 @@ def Income(fileRoom):
 def Main():
     fileRoom = 'Phong.csv'
     fileVisitors = 'KhachHang.csv'
-    # Menu11(fileRoom,fileVisitors)
+    # menu11(fileRoom,fileVisitors)
     # Menu3(fileRoom)
     # Menu10(fileVisitors)
     # Menu6(fileVisitors,fileRoom)
