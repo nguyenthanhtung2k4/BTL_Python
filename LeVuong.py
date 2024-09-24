@@ -200,9 +200,9 @@ def menu10(fileVisitors):
                     'TenKhach': NameVisitors[i],
                     'Sdt': PhoneNumber[i],
                     'GiayTo': Info[i],
-                    'NgayDat': CheckOrder[i],
-                    'NgayDen': DateCheckIn[i],
-                    'NgayDi': DateCheckOut[i],
+                    'NgayDat': CheckOrder[i].date(),
+                    'NgayDen': DateCheckIn[i].date(),
+                    'NgayDi': DateCheckOut[i].date(),
                     'StatusCheck': 'No'
                 }
             Writer.writerow(objVisitors)  # Ghi dữ liệu từng dòng
