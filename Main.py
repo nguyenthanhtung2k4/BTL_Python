@@ -39,7 +39,7 @@ def TextMenu(choce,text_small):
 {colorF_logo+colorB_logo}16. {RESETs+colorF_logo}Xem danh sách nhân viên
 {colorF_logo+colorB_logo}17. {RESETs+colorF_logo}Hiển thị báo cáo doanh thu chi tiết.{RESETs+colorF_logo}
 {colorF_logo+colorB_logo}18. {RESETs+colorF_logo}Setting
-{colorF_logo+colorB_logo}19. {RESETs+colorF_logo}About     
+{colorF_logo+colorB_logo}19. {RESETs+colorF_logo}About
 
 '''
      elif choce==2:
@@ -49,7 +49,7 @@ def TextMenu(choce,text_small):
      else:
           pass
      return text
-      
+
 def check(file):
      if os.path.exists(file):
           return( file)
@@ -140,7 +140,7 @@ def ThayDoiStatus(file,room):
                if data['Số phòng'] == room:
                     data['Trạng thái']=status
      return arr
-   
+
 def menu8(filePhong,fileKhach):
      System.Clear()
      fomat_khach=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
@@ -217,11 +217,11 @@ def view_all_Khach(file,check,text):
 
 def menu12(file):
      System.Clear()
-     #  check danh sach da dat phong trong file khach 
+     #  check danh sach da dat phong trong file khach
      print("Thông tin khách Đặt trước: \n") # chcek : NO --> Len lich
      print(f'\tSố phòng  Tên khách\t\tSdt\tNgày Đặt\tNgày Đến\tNgày Đi')
      view_all_Khach(file,'no','Đặt Lịch')
-    
+
      print("Thông tin khách Đã Nhận: \n") # check : Yess--> Nhan
      print(f'\tSố phòng\tTên khách   Sdt\t\tNgày Đến\tNgày Đi\n')
      view_all_Khach(file,'yes','Đặt Phòng')
@@ -235,7 +235,7 @@ def check_MaNv(file,fomat):
                for read  in render :
                     Int=int(read['MaNv'].strip())
                     if  Int == Ma:
-                         kq=True          
+                         kq=True
                return  kq,Ma
           
 def menu13(file,fomat):
