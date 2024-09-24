@@ -1,10 +1,12 @@
 import math
 from datetime import datetime #Lấy date
 import csv
+from pystyle import System
 # vuong:  11,3,10,6,17
 
 # 11.Trả phòng: Xác nhận khách đã trả phòng, tính toán số tiền cần thanh toán.
-def Menu11(fileRoom,fileVisitors):
+def menu11(fileRoom,fileVisitors):
+    System.Clear()
     CheckStatus = True
     # Check phòng đã nhận phòng hay chưa
     Number = []
@@ -69,7 +71,8 @@ def Menu11(fileRoom,fileVisitors):
                     return
 
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
-def Menu3(fileRoom):
+def menu3(fileRoom):
+    System.Clear()
     NumberDel = int(input("Nhap So phong ban can xoa: "))
     Number=[]
     cost=[]
@@ -134,7 +137,8 @@ def CheckDate(Date_To_Check,Start_Date,End_Date):
     else:
         return False
 
-def Menu10(fileVisitors):
+def menu10(fileVisitors):
+    System.Clear()
     Number=[]
     NameVisitors=[]
     PhoneNumber=[]
@@ -192,7 +196,8 @@ def Menu10(fileVisitors):
 
 #6.Sửa thông tin khách hàng: Cập nhật thông tin của một khách hàng đã tồn tại.
 
-def Menu6(fileVisitors,fileRoom):
+def menu6(fileVisitors,fileRoom):
+    System.Clear()
     NameVisitors = str(input("Nhap ten khach hang muon cap nhat: "))
     Number=[]
     NameVisitorsCheck=[]
@@ -263,7 +268,8 @@ def Menu6(fileVisitors,fileRoom):
                 }
             Writer.writerow(objUser)
 # 17 Xem báo cáo doanh thu. Hiển thị báo cáo doanh thu chi tiết.
-def Menu17(fileRoom,fileVisitors):
+def menu17(fileRoom,fileVisitors):
+    System.Clear()
     Number=[]
     Type=[]
     Cost=[]
@@ -336,4 +342,4 @@ def Main():
     # Menu6(fileVisitors,fileRoom)
     # Menu17(fileRoom,fileVisitors)
     print('Chương trình đã hoàn thành. Nên mở cmt để chạy test, Kiểm tra các fieldName có đồng nhất với file hay không trước khi test')
-Main()
+# Main()
