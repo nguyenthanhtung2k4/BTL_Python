@@ -147,8 +147,6 @@ def menu3(fileRoom):
 #10 Nhận phòng : Xác nhận khách đã nhận phòng.
 def CheckDate(Date_To_Check,Start_Date,End_Date):
     # Kiểm tra nếu ngày nằm trong khoảng giữa start_date và end_date
-    Start_Date = datetime.strptime(Start_Date,'%Y-%m-%d')
-    End_Date = datetime.strptime(End_Date,'%Y-%m-%d')
     if (Start_Date <= Date_To_Check <= End_Date):
         return True
     else:
@@ -173,12 +171,12 @@ def menu10(fileVisitors):
             NameVisitors.append(row['TenKhach'])
             PhoneNumber.append(row['Sdt'])
             Info.append(row['GiayTo'])
-            TakeDateCheckIn = datetime.strptime(row['NgayDen'],dateFormat).date()
+            TakeDateCheckIn = datetime.strptime(row['NgayDen'],dateFormat)
             DateCheckIn.append(TakeDateCheckIn)
-            TakeDateCheckOut = datetime.strptime(row['NgayDi'],dateFormat).date()
+            TakeDateCheckOut = datetime.strptime(row['NgayDi'],dateFormat)
             DateCheckOut.append(TakeDateCheckOut)
-            TakeDate = datetime.now().date()
-            TakeCheckOrder = datetime.strptime(row['NgayDat'],dateFormat).date()
+            TakeDate = datetime.now()
+            TakeCheckOrder = datetime.strptime(row['NgayDat'],dateFormat)
             CheckOrder.append(TakeCheckOrder)
             # print (Date, DateCheckIn,DateCheckOut)
     with open(fileVisitors, 'w', newline='', encoding='utf-8') as File:
@@ -193,9 +191,9 @@ def menu10(fileVisitors):
                     'TenKhach': NameVisitors[i],
                     'Sdt': PhoneNumber[i],
                     'GiayTo': Info[i],
-                    'NgayDat': CheckOrder[i],
-                    'NgayDen': DateCheckIn[i],
-                    'NgayDi': DateCheckOut[i],
+                    'NgayDat': CheckOrder[i].date(),
+                    'NgayDen': DateCheckIn[i].date(),
+                    'NgayDi': DateCheckOut[i].date(),
                     'StatusCheck': 'Yes'
                 }
             else:
@@ -204,15 +202,14 @@ def menu10(fileVisitors):
                     'TenKhach': NameVisitors[i],
                     'Sdt': PhoneNumber[i],
                     'GiayTo': Info[i],
-                    'NgayDat': CheckOrder[i],
-                    'NgayDen': DateCheckIn[i],
-                    'NgayDi': DateCheckOut[i],
+                    'NgayDat': CheckOrder[i].date(),
+                    'NgayDen': DateCheckIn[i].date(),
+                    'NgayDi': DateCheckOut[i].date(),
                     'StatusCheck': 'No'
                 }
             Writer.writerow(objVisitors)  # Ghi dữ liệu từng dòng
 
 #6.Sửa thông tin khách hàng: Cập nhật thông tin của một khách hàng đã tồn tại.
-
 def menu6(fileVisitors,fileRoom):
     System.Clear()
     NameVisitors = str(input("Nhap ten khach hang muon cap nhat: "))
