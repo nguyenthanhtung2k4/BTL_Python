@@ -19,4 +19,4 @@ Thuộc tính : trong file khach.csv
      NgayDat: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
      NgayDen: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
      NgayDi: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
-     StatusCheck: True of  False (True:  đã nhận | False : Lên Lịch)
+     StatusCheck: Yes of  No (Yes:  đã nhận | No : Lên Lịch)

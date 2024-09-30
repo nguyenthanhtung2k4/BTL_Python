@@ -1,5 +1,6 @@
 from LeVuong import*
-from BuiTuan import*
+# from BuiTuan import*
+from Add_Menu_Old import*
 from time import*
 import  csv
 import os, sys
@@ -84,7 +85,7 @@ def check_Date(text):
                if  y>=1000 and 1<=m<=12 and  1<=d<=31:
                     break
                else:
-                    print(f'{colorF}Định dạng Năm-Tháng-Ngày\n{erF}Vui Lòng Nhập Lại')
+                    print(f'{colorF}Định dạng Năm-Tháng-Ngày\n{erF}Vui Lòng Nhập Lại{RESETs}')
           except:
                print(f'{erB}Cú Pháp Sai :((')
      return text
@@ -100,11 +101,10 @@ def Write_File(file,type,fomat,ob,headr):
                render.writerow(ob)
                
 def menu4(file):
-     System.Clear()
-     print('Xem phong')
+     System.Clear();# print('Xem phong')
      with open(file,'r',newline='',encoding='utf-8') as file:
           render=csv.DictReader(file)
-          print(f'Số phòng\t Loại\t  Giá\t Trạng thái')
+          print(f'{colorF}Số phòng\t Loại\t  Giá\t Trạng thái{RESETs}')
           for row in render:
                so=row['Số phòng']
                loai=row['Loại']
@@ -145,7 +145,7 @@ def menu8(filePhong,fileKhach):
      System.Clear()
      fomat_khach=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
      fomat_phong=['Số phòng','Loại','Giá','Trạng thái']
-     print('Loại phòng gồm:\nTo,Đôi,Đơn\n\n')
+     print(f'{RESETs}Loại phòng gồm:\nTo,Đôi,Đơn\n\n')
      LoaiPhong=INput(str,'Loại Phòng: ',1)
      phong,gia=readphong(filePhong,LoaiPhong)
      if len(phong)>=1 :
@@ -153,7 +153,7 @@ def menu8(filePhong,fileKhach):
           Name=INput(str,'Tên Khách Hàng: ',1)
           Sdt=INput(int,'SĐT Khách: ',2)
           Giay=INput(str,'Nhập Giấy Tờ: ',1)
-          print(f'Check: [1]Nhận\n\t[]Lên Lịch')
+          print(f'{colorF}Check: [1]Nhận\n\t[]Lên Lịch')
           check=INput(int,'Check luôn or lên lịch: ',1)
           if check==1:
                NgayNhan=check_Date('Ngày Nhận: ')
@@ -184,9 +184,9 @@ def menu8(filePhong,fileKhach):
                else:
                     Write_File(filePhong,'a+',fomat_phong,ob,False)
           System.Clear()
-          print(f'\nĐặt Phòng Thành Công !\n')         
+          print(f'\n{colorB}Đặt Phòng Thành Công !{RESETs}\n')         
      else:
-          print("<HẾT PHÒNG>\n\nRất mong quý khách thông cảm !")
+          print(f"{RESETs+erB}<HẾT PHÒNG>\n\n{colorF}Rất mong quý khách thông cảm !{RESETs}")
 def view_all_Khach(file,check,text):
       with open (file, 'r',newline='',encoding='utf-8') as f:
           render=csv.DictReader(f)
@@ -213,17 +213,17 @@ def view_all_Khach(file,check,text):
                          print(f'\t{soPhong}\t{Ten}    {Sdt}\t{NgayDat}\t{Ngayden}\t{Ngaydi}')
           else:
                if dem==-1:
-                    print(f'\tKhông có {text}')
+                    print(f'\t{RESETs+erB}Không có {text+RESETs}')
 
 def menu12(file):
      System.Clear()
-     #  check danh sach da dat phong trong file khach
-     print("Thông tin khách Đặt trước: \n") # chcek : NO --> Len lich
-     print(f'\tSố phòng  Tên khách\t\tSdt\tNgày Đặt\tNgày Đến\tNgày Đi')
+     #  check danh sach da dat phong trong file khach 
+     print(f"{RESETs+colorB}Thông tin khách Đặt trước: {RESETs}\n") # chcek : NO --> Len lich
+     print(f'\t{colorF}Số phòng  Tên khách\t\tSdt\tNgày Đặt\tNgày Đến\tNgày Đi')
      view_all_Khach(file,'no','Đặt Lịch')
-
-     print("Thông tin khách Đã Nhận: \n") # check : Yess--> Nhan
-     print(f'\tSố phòng\tTên khách   Sdt\t\tNgày Đến\tNgày Đi\n')
+    
+     print(f"{RESETs+colorB}Thông tin khách Đã Nhận:{RESETs} \n") # check : Yess--> Nhan
+     print(f'\t{colorF}Số phòng\tTên khách   Sdt\t\tNgày Đến\tNgày Đi{RESETs}\n')
      view_all_Khach(file,'yes','Đặt Phòng')
 
 def check_MaNv(file,fomat):
@@ -244,7 +244,7 @@ def menu13(file,fomat):
      while True:
           check,Ma=check_MaNv(file,fomat)
           if(check):
-               print('\tMã Nv Tồn tại! \n\tNhập lại mã Nv')
+               print(f'\t{color_bar}Mã Nv Tồn tại! \n\t{erF}Nhập lại mã Nv{RESETs}')
           else:
                pass
                break;
@@ -261,7 +261,7 @@ def menu13(file,fomat):
           'NgayThamGia':date   
      }
      Write_File(file,'a+',fomat,ob_NhanVien,False)
-     print(f'Thêm nhân viên thành công!')
+     print(f'{RESETs+colorF}Thêm nhân viên thành công!{RESETs}')
 
 
 def Del_NhanVien(file,type,Ma):
@@ -290,11 +290,11 @@ def menu15(file,fomat):
                          clear.writerow(ob)
                break
           else:
-               print('\tMã Nv Không Tồn tại! \n\tNhập lại mã Nv')
+               print(f'\t{erB}Mã Nv Không Tồn tại!{RESETs} \n\t{colorF}Nhập lại mã Nv{RESETs}')
      if len(ob_NhanVien)>-1:
           pass
      else:
-          print('Lỗi xóa nhân viên :((')
+          print(f'{RESETs+colorB}Lỗi xóa nhân viên :(({RESETs}')
   
 def menu16(file):
      System.Clear()
@@ -305,7 +305,7 @@ def menu16(file):
           length=file.readline()# check  do dai  file
           if length> '0':
                render=csv.DictReader(file)
-               print('MaNv\tHoTen\t\tChucVu\tSdt\tNgayThamGia')
+               print(f'{colorF}MaNv\tHoTen\t\tChucVu\tSdt\tNgayThamGia{RESETs}')
                for data  in  render:
                     Ma=data['MaNv']
                     HoTen=data['HoTen']
@@ -314,19 +314,19 @@ def menu16(file):
                     NgayThamgia=data['NgayThamGia']
                     print(f'{Ma}\t{HoTen}\t{ChucVu}\t{Sdt}\t{NgayThamgia}')
           else:
-                    print('\t\t   Danh Sách Trống rỗng !')
+                    print(f'\t\t   {RESETs+color_bar}Danh Sách Trống rỗng !{RESETs}')
                     quit;
 def about():
      System.Clear()
-     about=f'''
-\t\tVề chúng tôi
+     about=f'''{RESETs+colorB}
+\t\tVề chúng tôi{RESETs+colorF}
 \tChương trình được phát triển bởi các sinh viên Đại Nam phát triển
  - Các sinh viên thực hiện:
                     Nguyễn Thanh Tùng
                     Lê Văn Vượng
                     Bùi Quang Tuấn
 Chương trình được thiết kế để giúp các khách sạn nâng cao chất lượng dịch vụ,tối ưu hóa quy trình hoạt động và tăng doanh thu.Chúng tôi phát triển gồm 20 chức năng để quản lý khách sản một cách tận tiện nhất
-
+{RESETs}
 '''
      for  i  in about:
           sys.stdout.write(i)
@@ -364,8 +364,7 @@ def Update_Color():
           Back_color=data['Setting']['Back_Color']
           Font_ERROR=data['Setting']['Font_ERROR']
           Back_ERROR=data['Setting']['Back_ERROR']
-          
-          for i  in f :
+          for i  in f :# check font
                if  Font_color== i:
                     Font_color=f[i]
                if  Font_ERROR== i:
@@ -374,7 +373,7 @@ def Update_Color():
                     Bar_Logo=f[i]
                if Font_Logo== i:
                     Font_Logo=f[i]
-          for  j in b:
+          for  j in b:#check back
                if  Back_color== j:
                     Back_color=b[j]
                if Back_ERROR == j:
@@ -400,7 +399,8 @@ def setting():
 {colorB_logo+colorF_logo}[4]{colorF_logo}Delay_logo
 {colorB_logo+colorF_logo}[5]{colorF_logo}Delay_about       
                ''')
-          nhap=INput(int,f'Lựa chọn')
+          nhap=INput(int,f'Lựa chọn',2)
+          
 def Auto_Color():
      if check(file_Setting):
           pass
@@ -416,10 +416,10 @@ def error():
     
 if  __name__=='__main__':
 #//// data duong dan chuyen vao
-     file_phong=r'Phong.csv'
-     file_Khach=r'KhachHang.csv'
-     file_NhanVien=r'NhanVien.csv'
-     file_Setting=r'Setting.json'
+     file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+     file_Khach=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
+     file_NhanVien=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\NhanVien.csv'
+     file_Setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'
 
      fomat_khach=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
      fomat_phong=['Số phòng','Loại','Giá','Trạng thái']
@@ -435,20 +435,20 @@ if  __name__=='__main__':
      
 #////All Menu 16,8,4,15,12,13
      options={
-          1: lambda: menu1(),
-          2: lambda: menu2(),
+          1: lambda: menu1(file_phong,True),
+          2: lambda: menu2(file_phong,True),
           3: lambda: menu3(file_phong),
           4: lambda: menu4(file_phong),
-          5: lambda: menu5(),
+          5: lambda: menu5(file_phong,True),
           6: lambda: menu6(file_Khach,file_phong),
-          # 7: lambda: menu7(),
+          7: lambda: menu7(),
           8: lambda: menu8(file_phong,file_Khach),
-          # 9: lambda: menu9(),
+          9: lambda: menu9(),
           10: lambda: menu10(file_Khach),
           11: lambda: menu11(file_phong,file_Khach),
           12: lambda: menu12(file_Khach),
           13: lambda: menu13(file_NhanVien,fomat_nhanVien),
-          # 14: lambda: menu14(),
+          14: lambda: menu14(),
           15: lambda: menu15(file_NhanVien,fomat_nhanVien),
           16: lambda: menu16(file_NhanVien),
           17: lambda: menu17(file_phong,file_Khach),

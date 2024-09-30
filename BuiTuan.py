@@ -1,5 +1,9 @@
 import csv
 import os
+from pystyle import System
+# from Main import Update_Color # lay mau color
+# colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color
+
 #1.Thêm phòng mới: Thêm thông tin một phòng mới vào hệ thống.
 #2.Sửa thông tin phòng: Cập nhật thông tin của một phòng đã tồn tại.
 #3.Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
@@ -38,6 +42,7 @@ if __name__ == '__main__':
     else:
         print('File khong ton tai!')
 def menu1(so,loai,gia,status):
+    System.Clear();
     print("Nhập thông tin của phòng muốn thêm:")
     phong=input("Số phòng: ")
     pl=input("Loại phòng: ")
@@ -62,6 +67,7 @@ def menu1(so,loai,gia,status):
             print("Đã thêm thông tin phòng thành công!")
             break
 def menu2(so,status):
+    System.Clear();
     phong=input("Nhập số phòng bạn cần thay đổi: ")
     ktr=0
     dem=-1
@@ -77,6 +83,7 @@ def menu2(so,status):
         print("Số phòng bạn nhập không tồn tại, hãy nhập lại!")
         return menu2(so,status)
 def menu5(so,loai,gia,status):
+    System.Clear();
     for i in range(len(so)):
         if status[i]!="Yes":
             print(so[i],"\t\t",loai[i],"\t",gia[i],"\t",status[i])

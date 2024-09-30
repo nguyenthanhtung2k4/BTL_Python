@@ -1,6 +1,5 @@
 {
     "Setting": {
-
         "Font_Logo": "F4",
         "Bar_Logo": "F6",
         "Back_Logo": "B0",
@@ -10,7 +9,7 @@
         "Back_ERROR": "B4"
     },
     "Delay": {
-        "Time_logo": 0.025,
+        "Time_logo": 0.0025,
         "Time_About": 0.025
     },
     "Tabale": {

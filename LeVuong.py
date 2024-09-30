@@ -2,6 +2,8 @@ import math
 from datetime import datetime #Lấy date
 import csv
 from pystyle import System
+# from Main import Update_Color # lay mau color
+# colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
 # vuong:  11,3,10,6,17
 
 # 11.Trả phòng: Xác nhận khách đã trả phòng, tính toán số tiền cần thanh toán.
@@ -88,7 +90,7 @@ def menu11(fileRoom,fileVisitors):
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
     System.Clear()
-    NumberDel = int(input("Nhap So phong ban can xoa: "))
+    NumberDel = int(input(f"Nhap So phong ban can xoa: "))
     Number=[]
     cost=[]
     TypeRoom=[]
@@ -282,6 +284,7 @@ def menu6(fileVisitors,fileRoom):
                     'StatusCheck': status #Giả sử cho Status bằng yes
                 }
             Writer.writerow(objUser)
+            print('\nĐã Sửa Thông tin khách hàng\n\t Thành Công!\n')
 # 17 Xem báo cáo doanh thu. Hiển thị báo cáo doanh thu chi tiết.
 def menu17(fileRoom,fileVisitors):
     System.Clear()
@@ -349,12 +352,12 @@ def Income(fileRoom):
 
 
 def Main():
-    fileRoom = 'Phong.csv'
-    fileVisitors = 'KhachHang.csv'
+    fileRoom = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+    fileVisitors = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
     # menu11(fileRoom,fileVisitors)
-    # Menu3(fileRoom)
-    # Menu10(fileVisitors)
+    # menu3(fileRoom)
+    # menu10(fileVisitors)
     # Menu6(fileVisitors,fileRoom)
-    # Menu17(fileRoom,fileVisitors)
-    print('Chương trình đã hoàn thành. Nên mở cmt để chạy test, Kiểm tra các fieldName có đồng nhất với file hay không trước khi test')
+    # menu17(fileRoom,fileVisitors)
+    # print('Chương trình đã hoàn thành. Nên mở cmt để chạy test, Kiểm tra các fieldName có đồng nhất với file hay không trước khi test')
 # Main()
