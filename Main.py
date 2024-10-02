@@ -1,6 +1,7 @@
 from LeVuong import*
 # from BuiTuan import*
 from Add_Menu_Old import*
+from Setting import*
 from time import*
 import  csv
 import os, sys
@@ -382,13 +383,18 @@ def Update_Color():
                     Back_Logo=b[j]
                     
           return Font_Logo,Back_Logo,Bar_Logo ,Font_color,Back_color,Font_ERROR,Back_ERROR;
-def setting():
+def read_Table_color():
+     with open(file_Setting,'r') as f:
+          data=json.load(f)
+          return data
+def setting(file_setting):
      System.Clear()
+     data_Setting=read_Table_color()
      print('[1]Version\n[2]Setting\n[3]About')
      nhap=INput(int,'Nhập ',2)
      if nhap==1:
           System.Clear()
-          version='TVT_1.00'
+          version='TVT_1.10'
           print(f'\n\nVersion: {version}\n\n')
      elif nhap==2:
           print(f'''
@@ -400,7 +406,14 @@ def setting():
 {colorB_logo+colorF_logo}[5]{colorF_logo}Delay_about       
                ''')
           nhap=INput(int,f'Lựa chọn',2)
-          
+          if nhap==1:
+               for c,color in enumerate(data_Setting['Tabale']['Font'].values()):
+                    print(f'[{c}]{color}')
+               
+               font_color=INput(int,f'Chọn màu chữ',2)
+               font_color=f'F{font_color}'
+               data_Setting['Tabale']['Font'][font_color]=font_color
+               
 def Auto_Color():
      if check(file_Setting):
           pass
@@ -441,18 +454,18 @@ if  __name__=='__main__':
           4: lambda: menu4(file_phong),
           5: lambda: menu5(file_phong,True),
           6: lambda: menu6(file_Khach,file_phong),
-          7: lambda: menu7(),
+          7: lambda: menu7(),# chx xog
           8: lambda: menu8(file_phong,file_Khach),
-          9: lambda: menu9(),
+          9: lambda: menu9(),# chx xog
           10: lambda: menu10(file_Khach),
           11: lambda: menu11(file_phong,file_Khach),
           12: lambda: menu12(file_Khach),
           13: lambda: menu13(file_NhanVien,fomat_nhanVien),
-          14: lambda: menu14(),
+          14: lambda: menu14(),# chx xog
           15: lambda: menu15(file_NhanVien,fomat_nhanVien),
           16: lambda: menu16(file_NhanVien),
-          17: lambda: menu17(file_phong,file_Khach),
-          18: lambda: setting(),
+          17: lambda: menu17(),#chx xog
+          18: lambda: setting(file_Setting),
           19: lambda: about(),
      }
      Back_RESET="\033[49m";Font_RESET="\033[39m"
@@ -461,7 +474,10 @@ if  __name__=='__main__':
      # Update_Color()
      colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
      # print(colorF,colorB,erF,erB)
-
+# //////////////////// TEST
+     setting(file_Setting)
+# ///////////////////////////
+     
 #  ///  about
      for i in  TextMenu(1,''):
           sys.stdout.write(i)
@@ -479,5 +495,4 @@ if  __name__=='__main__':
                break;
           options.get(Nhap,lambda: error())()
 
-#  dang chinh sua color xog phan INPut dong 62
-# chinh sua not va gop chuc nang lai voi nhau
+#  chinh  setting +  menu chx xog

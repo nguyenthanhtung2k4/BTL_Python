@@ -1,10 +1,7 @@
 Việc cần làm:
-          Kết hợp lại cả các file code lại với nhau
-          Xây dựng nốt Setting (time,color)
+          Kết nối lại  menu  còn thiếu
+          nâng cấp lên tikiner
           
-          Chạy  thử nghiệm các code.
-
-
 
 
 
