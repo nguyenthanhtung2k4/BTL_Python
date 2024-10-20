@@ -1,6 +1,7 @@
 import csv
 import os
-from pystyle import System
+from datetime import datetime #Lấy date
+#from pystyle import System
 # from Main import Update_Color # lay mau color
 # colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color
 
@@ -41,8 +42,50 @@ if __name__ == '__main__':
                 status.append(row['Trạng thái'])
     else:
         print('File khong ton tai!')
+MaNv=[]
+TenNV=[]
+Chuc=[]
+sdt=[]
+DayJoin=[]
+if __name__ == '__main__':
+    file_nhanvien='NhanVien.csv'
+    if check(file_phong):
+        with open(file_nhanvien,'r', encoding='utf-8')as r:
+            rende=csv.DictReader(r)
+            for row in rende:
+                MaNv.append(row['MaNv'])
+                TenNV.append(row['HoTen'])
+                Chuc.append(row['ChucVu'])
+                sdt.append(row['Sdt'])
+                DayJoin.append(row['NgayThamGia'])
+    else:
+        print('File khong ton tai!')
+Number = []
+Name =[]
+PhoneNumber=[]
+Info=[]
+DateTakeRoom =[]
+DateCheckIn=[]
+DateCheckOut=[]
+Status_Visitors=[]
+if __name__ == '__main__':
+    file_KHACH='KhachHang.csv'
+    if check(file_KHACH):
+        with open(file_KHACH,'r', encoding='utf-8')as r:
+            rendr=csv.DictReader(r)
+            for row in rendr:
+                Number.append(row['SoPhong']) #Lay so phong file khachang
+                Name.append(row['TenKhach'])
+                PhoneNumber.append(row['Sdt'])
+                Info.append(row['GiayTo'])
+                DateTakeRoom.append(row['NgayDat'])
+                DateCheckIn.append(row['NgayDen'])
+                DateCheckOut.append(row['NgayDi'])
+                Status_Visitors.append(row['StatusCheck'])
+    else:
+        print('File khong ton tai!')
 def menu1(so,loai,gia,status):
-    System.Clear();
+    #System.Clear();
     print("Nhập thông tin của phòng muốn thêm:")
     phong=input("Số phòng: ")
     pl=input("Loại phòng: ")
@@ -64,10 +107,21 @@ def menu1(so,loai,gia,status):
             loai.insert(i+1,pl)
             gia.insert(i+1,money)
             status.insert(i+1,tt)
-            print("Đã thêm thông tin phòng thành công!")
             break
+    with open(file_phong,'w',encoding='utf-8') as f:
+        WriteF = csv.DictWriter(f,fieldnames=['Số phòng','Loại','Giá','Trạng thái'])
+        WriteF.writeheader()
+        for i in range(len(so)):
+            obj={
+                'Số phòng':so[i],
+                'Loại':loai[i],
+                'Giá':gia[i],
+                'Trạng thái':status[i]
+            }
+            WriteF.writerow(obj)
+        print("Đã thêm thông tin phòng thành công!")
 def menu2(so,status):
-    System.Clear();
+    #System.Clear();
     phong=input("Nhập số phòng bạn cần thay đổi: ")
     ktr=0
     dem=-1
@@ -82,8 +136,58 @@ def menu2(so,status):
     else:
         print("Số phòng bạn nhập không tồn tại, hãy nhập lại!")
         return menu2(so,status)
+    with open(file_phong,'w',encoding='utf-8') as f:
+        WriteF = csv.DictWriter(f,fieldnames=['Số phòng','Loại','Giá','Trạng thái'])
+        WriteF.writeheader()
+        for i in range(len(so)):
+            obj={
+                'Số phòng':so[i],
+                'Loại':loai[i],
+                'Giá':gia[i],
+                'Trạng thái':status[i]
+            }
+            WriteF.writerow(obj)
+        print("Đã thay đổi trạng thái phòng thành công!")
 def menu5(so,loai,gia,status):
-    System.Clear();
+    #System.Clear();
     for i in range(len(so)):
         if status[i]!="Yes":
             print(so[i],"\t\t",loai[i],"\t",gia[i],"\t",status[i])
+
+def menu7():
+    print("Số phòng\t\tTên Khách\t\tSĐT\t\t\t Giấy tờ\n")
+    for i in range(len(Number)):
+        print(Number[i],"\t\t\t",Name[i],"\t\t\t",PhoneNumber[i],"\t\t\t",Info[i])
+def menu14():
+    m=input("Nhập mã nhân viên cần thay đổi: ")
+    dem=0
+    if m in MaNv:
+        for i in range(len(MaNv)):
+            if m==MaNv[i]:
+                print("Nhập thông tin nhân viên cần thay đổi:")
+                n=input("Họ tên: ")
+                c=input("Chức vụ: ")
+                p=input("Số điện thoại: ")
+                d=input("Ngày tham gia: ")
+                TenNV[i]=n
+                Chuc[i]=c
+                sdt[i]=p
+                DayJoin[i]=d
+                break
+    else:
+        print("Mã nhân viên bạn nhâp không tồn tại, vui lòng nhập lại!")
+        menu14()
+    with open(file_nhanvien,'w',encoding='utf-8') as f:
+        WriteF = csv.DictWriter(f,fieldnames=['MaNv','HoTen','ChucVu','Sdt','NgayThamGia'])
+        WriteF.writeheader()
+        for i in range(len(MaNv)):
+            obj={
+                'MaNv':MaNv[i],
+                'HoTen':TenNV[i],
+                'ChucVu':Chuc[i],
+                'Sdt':sdt[i],
+                'NgayThamGia':DayJoin[i]
+            }
+            WriteF.writerow(obj)
+    print("Đã thay đổi thông tin nhân viên thành công!")
+menu14()
