@@ -283,7 +283,7 @@ def menu6(fileVisitors,fileRoom):
             Writer.writerow(objUser)
             print('\nĐã Sửa Thông tin khách hàng\n\t Thành Công!\n')
             
-menu6('KhachHang.csv','Phong.csv')
+# menu6('KhachHang.csv','Phong.csv')
 # 17 Xem báo cáo doanh thu. Hiển thị báo cáo doanh thu chi tiết.
 def menu17(fileRoom,fileVisitors):
     # System.Clear()
@@ -337,6 +337,8 @@ def menu17(fileRoom,fileVisitors):
                     }
                 writer.writerow(objRoom) #Cập nhật trạng thái của Phong.csv
     print(f'Doanh Thu la: {Income(fileRoom)}$')
+
+menu17('Phong.csv','KhachHang.csv')
 def Income(fileRoom):
     Cost = []
     Return = 0
