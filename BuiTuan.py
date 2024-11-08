@@ -120,6 +120,8 @@ def menu1(so,loai,gia,status):
             }
             WriteF.writerow(obj)
         print("Đã thêm thông tin phòng thành công!")
+menu1(so,loai,gia,status)
+
 def menu2(so,status):
     #System.Clear();
     phong=input("Nhập số phòng bạn cần thay đổi: ")
@@ -190,4 +192,3 @@ def menu14():
             }
             WriteF.writerow(obj)
     print("Đã thay đổi thông tin nhân viên thành công!")
-menu14()

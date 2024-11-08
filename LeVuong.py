@@ -1,14 +1,14 @@
 import math
 from datetime import datetime #Lấy date
 import csv
-from pystyle import System
+# from pystyle import System 
 # from Main import Update_Color # lay mau color
 # colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
 # vuong:  11,3,10,6,17
 
 # 11.Trả phòng: Xác nhận khách đã trả phòng, tính toán số tiền cần thanh toán.
 def menu11(fileRoom,fileVisitors):
-    System.Clear()
+    # System.Clear()
     CheckStatus = True
     # Check phòng đã nhận phòng hay chưa
     Number = []
@@ -89,7 +89,7 @@ def menu11(fileRoom,fileVisitors):
 
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
-    System.Clear()
+    # System.Clear()
     NumberDel = int(input(f"Nhap So phong ban can xoa: "))
     Number=[]
     cost=[]
@@ -125,7 +125,7 @@ def menu3(fileRoom):
     if(CheckDelete == False):
         print(f"Phòng {NumberDel} không tồn tại.")
 
-    with open(fileRoom,'w',encoding='utf-8') as FileWrite:
+    with open(fileRoom,'w',encoding='utf-8', newline='') as FileWrite:
         format=['Số phòng','Loại','Giá','Trạng thái']
         writer=csv.DictWriter(FileWrite,fieldnames=format) #Lưu thuộc tính vào FileWrite với fieldnames là mảng format
         writer.writeheader() #thuộc tính này nhằm để lưu lại các fieldnames ở trong file
@@ -145,7 +145,7 @@ def menu3(fileRoom):
 
 
 #10 Nhận phòng : Xác nhận khách đã nhận phòng.
-def CheckDate(Date_To_Check,Start_Date,End_Date):
+def CheckDate(Start_Date,Date_To_Check,End_Date):
     # Kiểm tra nếu ngày nằm trong khoảng giữa start_date và end_date
     if (Start_Date <= Date_To_Check <= End_Date):
         return True
@@ -153,7 +153,7 @@ def CheckDate(Date_To_Check,Start_Date,End_Date):
         return False
 
 def menu10(fileVisitors):
-    System.Clear()
+    # System.Clear()
     Number=[]
     NameVisitors=[]
     PhoneNumber=[]
@@ -211,7 +211,7 @@ def menu10(fileVisitors):
 
 #6.Sửa thông tin khách hàng: Cập nhật thông tin của một khách hàng đã tồn tại.
 def menu6(fileVisitors,fileRoom):
-    System.Clear()
+    # System.Clear()
     NameVisitors = str(input("Nhap ten khach hang muon cap nhat: "))
     Number=[]
     NameVisitorsCheck=[]
@@ -250,7 +250,7 @@ def menu6(fileVisitors,fileRoom):
                 DateTakeRoom[i] =  datetime.strptime(DateTakeRoom[i],'%Y-%m-%d').strftime('%Y-%m-%d') # Chuyen ve dang date de check status và đưa về dạng Y/M/D
                 DateCheckIn[i] = datetime.strptime(DateCheckIn[i],'%Y-%m-%d').strftime('%Y-%m-%d')
                 DateCheckOut[i] = datetime.strptime(DateCheckOut[i],'%Y-%m-%d').strftime('%Y-%m-%d')
-                if(CheckDate(DateTake,DateCheckIn[i],DateCheckOut[i])):
+                if(CheckDate(DateTakeRoom[i],DateCheckIn[i],DateCheckOut[i])):
                     status = 'Yes'
                 else:
                     status = 'No'
@@ -282,9 +282,11 @@ def menu6(fileVisitors,fileRoom):
                 }
             Writer.writerow(objUser)
             print('\nĐã Sửa Thông tin khách hàng\n\t Thành Công!\n')
+            
+menu6('KhachHang.csv','Phong.csv')
 # 17 Xem báo cáo doanh thu. Hiển thị báo cáo doanh thu chi tiết.
 def menu17(fileRoom,fileVisitors):
-    System.Clear()
+    # System.Clear()
     Number=[]
     Type=[]
     Cost=[]
@@ -348,9 +350,9 @@ def Income(fileRoom):
         return Return
 
 
-def Main():
-    fileRoom = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
-    fileVisitors = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
+# def Main():
+    # fileRoom = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+    # fileVisitors = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
     # menu11(fileRoom,fileVisitors)
     # menu3(fileRoom)
     # menu10(fileVisitors)

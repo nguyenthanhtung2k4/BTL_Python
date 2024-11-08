@@ -1,6 +1,6 @@
 from LeVuong import*
 # from BuiTuan import*
-from Add_Menu_Old import*
+from Tuan2 import*
 from Setting import*
 from time import*
 import  csv
@@ -9,8 +9,8 @@ import re,json
 
 #  try expcet cai thu vien pystyle 
 try:
-     from pystyle import System
-except ValueError:
+     from pystyle import System # type: ignore
+except :
      os.system('pip install pystyle')
      
 '''
@@ -448,23 +448,23 @@ if  __name__=='__main__':
      
 #////All Menu 16,8,4,15,12,13
      options={
-          1: lambda: menu1(file_phong,True),
-          2: lambda: menu2(file_phong,True),
+          1: lambda: menu1(file_phong),
+          2: lambda: menu2(file_phong),
           3: lambda: menu3(file_phong),
           4: lambda: menu4(file_phong),
-          5: lambda: menu5(file_phong,True),
+          5: lambda: menu5(file_phong),
           6: lambda: menu6(file_Khach,file_phong),
-          7: lambda: menu7(),# chx xog
+          7: lambda: menu7(file_Khach),
           8: lambda: menu8(file_phong,file_Khach),
-          9: lambda: menu9(),# chx xog
+          9: lambda: menu9(file_Khach),
           10: lambda: menu10(file_Khach),
           11: lambda: menu11(file_phong,file_Khach),
           12: lambda: menu12(file_Khach),
           13: lambda: menu13(file_NhanVien,fomat_nhanVien),
-          14: lambda: menu14(),# chx xog
+          14: lambda: menu14(file_NhanVien),
           15: lambda: menu15(file_NhanVien,fomat_nhanVien),
           16: lambda: menu16(file_NhanVien),
-          17: lambda: menu17(),#chx xog
+          17: lambda: menu17(file_phong,file_Khach),
           18: lambda: setting(file_Setting),
           19: lambda: about(),
      }
@@ -475,7 +475,19 @@ if  __name__=='__main__':
      colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
      # print(colorF,colorB,erF,erB)
 # //////////////////// TEST
-     setting(file_Setting)
+     # setting(file_Setting)
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 # ///////////////////////////
      
 #  ///  about
