@@ -369,7 +369,7 @@ def Income(fileRoom):
 
 def Main():
     fileRoom = r'Phong.csv'
-    fileVisitors = r'KhachHang.csv'
+    fileVisitors = r'KhachHang.csv' # Phần đường dẫn file: Nên để là đường dẫn tương đối, tránh để cả đường dẫn tuyệt đối vì OS
     # menu11(fileRoom,fileVisitors)
     # menu3(fileRoom)
     # menu10(fileVisitors)
