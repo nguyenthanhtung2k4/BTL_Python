@@ -218,8 +218,11 @@ def menu6(fileVisitors,fileRoom):
     PhoneNumber=[]
     Info=[]
     DateTakeRoom=[]
+    DateTakeRoomInput =''
     DateCheckIn=[]
+    DateCheckInInput=''
     DateCheckOut=[]
+    DateCheckOutInput=''
     DateTake = datetime.now()
     status = ''
     Updated = False
@@ -244,12 +247,29 @@ def menu6(fileVisitors,fileRoom):
                 NameVisitorsCheck[i] = str(input("Ten: "))
                 PhoneNumber[i] = str(input("So dien thoai: "))
                 Info[i] = str(input("Giay to: "))
-                DateTakeRoom[i] = str(input("Nhap ngay dat moi: "))
-                DateCheckIn[i] = str(input("Nhap ngay den: "))
-                DateCheckOut[i] = str(input("Nhap ngay di: "))
-                DateTakeRoom[i] =  datetime.strptime(DateTakeRoom[i],'%Y-%m-%d').strftime('%Y-%m-%d') # Chuyen ve dang date de check status và đưa về dạng Y/M/D
-                DateCheckIn[i] = datetime.strptime(DateCheckIn[i],'%Y-%m-%d').strftime('%Y-%m-%d')
-                DateCheckOut[i] = datetime.strptime(DateCheckOut[i],'%Y-%m-%d').strftime('%Y-%m-%d')
+                while True:
+                    DateTakeRoomInput = input("Nhập ngày đặt mới (yyyy-mm-dd): ")
+                    try:
+                        DateTakeRoom[i] = datetime.strptime(DateTakeRoomInput, '%Y-%m-%d')
+                        break  # Thoát vòng lặp nếu đúng định dạng
+                    except ValueError:
+                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+
+                while True:
+                    DateCheckInInput = input("Nhập ngày đến (yyyy-mm-dd): ")
+                    try:
+                        DateCheckIn[i] = datetime.strptime(DateCheckInInput, '%Y-%m-%d')
+                        break
+                    except ValueError:
+                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+
+                while True:
+                    DateCheckOutInput = input("Nhập ngày đi (yyyy-mm-dd): ")
+                    try:
+                        DateCheckOut[i] = datetime.strptime(DateCheckOutInput, '%Y-%m-%d')
+                        break
+                    except ValueError:
+                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
                 if(CheckDate(DateTake,DateCheckIn[i],DateCheckOut[i])):
                     status = 'Yes'
                 else:
@@ -259,17 +279,13 @@ def menu6(fileVisitors,fileRoom):
                     'TenKhach': NameVisitorsCheck[i],
                     'Sdt': PhoneNumber[i],
                     'GiayTo': Info[i],
-                    'NgayDat': DateTakeRoom[i],
-                    'NgayDen': DateCheckIn[i],
-                    'NgayDi': DateCheckOut[i],
+                    'NgayDat': DateTakeRoom[i].strftime('%Y-%m-%d'),
+                    'NgayDen': DateCheckIn[i].strftime('%Y-%m-%d'),
+                    'NgayDi': DateCheckOut[i].strftime('%Y-%m-%d'),
                     'StatusCheck': status
                 }
                 Updated = True
             else:
-                if(CheckDate(DateTake,DateCheckIn[i],DateCheckOut[i])):
-                    status = 'Yes'
-                else:
-                    status = 'No'
                 objUser={
                     'SoPhong': Number[i],
                     'TenKhach': NameVisitorsCheck[i],
@@ -281,7 +297,11 @@ def menu6(fileVisitors,fileRoom):
                     'StatusCheck': status #Giả sử cho Status bằng yes
                 }
             Writer.writerow(objUser)
-            print('\nĐã Sửa Thông tin khách hàng\n\t Thành Công!\n')
+            # print(objUser)
+        if not Updated:
+            print("Không tìm thấy khách hàng nào trong danh sách.")
+        else:
+            print("Cập nhật thông tin thành công.")
 # 17 Xem báo cáo doanh thu. Hiển thị báo cáo doanh thu chi tiết.
 def menu17(fileRoom,fileVisitors):
     System.Clear()
@@ -289,7 +309,6 @@ def menu17(fileRoom,fileVisitors):
     Type=[]
     Cost=[]
     TakeDate = datetime.now()
-
     Number_RoomVisitors =[]
     Name=[]
     PhoneNumber=[]
@@ -307,7 +326,7 @@ def menu17(fileRoom,fileVisitors):
     with open(fileVisitors,'r',encoding='utf-8') as File:
         Reader = csv.DictReader(File)
         for i in Reader:
-            Number_RoomVisitors.append(i['Số phòng'])
+            Number_RoomVisitors.append(i['SoPhong'])
             Name.append(i['TenKhach'])
             PhoneNumber.append(i['Sdt'])
             Info.append(i['GiayTo'])
@@ -349,12 +368,12 @@ def Income(fileRoom):
 
 
 def Main():
-    fileRoom = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
-    fileVisitors = r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
+    fileRoom = r'Phong.csv'
+    fileVisitors = r'KhachHang.csv'
     # menu11(fileRoom,fileVisitors)
     # menu3(fileRoom)
     # menu10(fileVisitors)
-    # Menu6(fileVisitors,fileRoom)
+    # menu6(fileVisitors,fileRoom)
     # menu17(fileRoom,fileVisitors)
     # print('Chương trình đã hoàn thành. Nên mở cmt để chạy test, Kiểm tra các fieldName có đồng nhất với file hay không trước khi test')
 # Main()
