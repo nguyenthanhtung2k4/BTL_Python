@@ -2,6 +2,7 @@ import csv
 from datetime import datetime
 from pystyle import System
 from Setting import*
+from Main import check_Date
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
     System.Clear()
@@ -158,22 +159,20 @@ def menu11(fileRoom, fileVisitors):
 # cap nhap  thong tin khach hang
 def menu6(fileVisitors,fileRoom):
     System.Clear()
-    InputNumber = str(input("Nhap so phong cap nhat: "))
-    Number=[]
-    NameVisitorsCheck=[]
-    PhoneNumber=[]
-    Info=[]
-    DateTakeRoom=[]
-    DateTakeRoomInput =''
-    DateCheckIn=[]
-    DateCheckInInput=''
-    DateCheckOut=[]
-    DateCheckOutInput=''
-    DateTake = datetime.now()
-    status = ''
+    
+    InputNumber = str(input("Nhập số phòng cần cập nhật: "))
+    Number = []
+    NameVisitorsCheck = []
+    PhoneNumber = []
+    Info = []
+    DateTakeRoom = []
+    DateCheckIn = []
+    DateCheckOut = []
+    CheckStatus = []
     Updated = False
-    # print(len(fileVisitors)) #13
-    with open(fileVisitors,'r',encoding='utf-8') as File:
+
+    # Đọc dữ liệu từ file
+    with open(fileVisitors, 'r', encoding='utf-8') as File:
         Reader = csv.DictReader(File)
         for i in Reader:
             Number.append(i['SoPhong'])
@@ -183,57 +182,37 @@ def menu6(fileVisitors,fileRoom):
             DateTakeRoom.append(i['NgayDat'])
             DateCheckIn.append(i['NgayDen'])
             DateCheckOut.append(i['NgayDi'])
-            
-    with open(fileVisitors,'w',encoding='utf-8', newline='') as FileWrite:
-        format=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
-        Writer=csv.DictWriter(FileWrite,fieldnames=format)
+            CheckStatus.append(i['StatusCheck'])
+
+    # Ghi dữ liệu đã cập nhật vào file
+    with open(fileVisitors, 'w', encoding='utf-8', newline='') as FileWrite:
+        format = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo', 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
+        Writer = csv.DictWriter(FileWrite, fieldnames=format)
         Writer.writeheader()
-        for i in range(0,len(Number),1):
-            if(InputNumber == Number[i]):
-                print("Nhap thong tin can cap nhat: ")
-                NameVisitorsCheck[i] = str(input("Ten: "))
-                PhoneNumber[i] = str(input("So dien thoai: "))
-                Info[i] = str(input("Giay to: "))
-                while True:
-                    DateTakeRoomInput = input("Nhập ngày đặt mới (yyyy-mm-dd): ")
-                    try:
-                        DateTakeRoom[i] = datetime.strptime(DateTakeRoomInput, '%Y-%m-%d')
-                        break  # Thoát vòng lặp nếu đúng định dạng
-                    except ValueError:
-                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
 
-                while True:
-                    DateCheckInInput = input("Nhập ngày đến (yyyy-mm-dd): ")
-                    try:
-                        DateCheckIn[i] = datetime.strptime(DateCheckInInput, '%Y-%m-%d')
-                        break
-                    except ValueError:
-                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+        for i in range(len(Number)):
+            if InputNumber == Number[i]:
+                print("Nhập thông tin cần cập nhật: ")
+                NameVisitorsCheck[i] = str(input("Tên: "))
+                PhoneNumber[i] = str(input("Số điện thoại: "))
+                Info[i] = str(input("Giấy tờ: "))
 
-                while True:
-                    DateCheckOutInput = input("Nhập ngày đi (yyyy-mm-dd): ")
-                    try:
-                        DateCheckOut[i] = datetime.strptime(DateCheckOutInput, '%Y-%m-%d')
-                        break
-                    except ValueError:
-                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
-                if(CheckDate(DateTake,DateCheckIn[i],DateCheckOut[i])):
+                DateTakeRoom[i] = check_Date("Nhập ngày đặt mới (yyyy-mm-dd): ")
+                DateCheckIn[i] = check_Date("Nhập ngày đến đến (yyyy-mm-dd): ")
+                DateCheckOut[i] = check_Date("Nhập ngày đi đi (yyyy-mm-dd): ")
+
+                # Kiểm tra tính hợp lệ của ngày
+                if CheckDate(DateTakeRoom[i], DateCheckIn[i], DateCheckOut[i]):
                     status = 'Yes'
+                    CheckStatus[i] = status
+                    Updated = True
+                    print("Thông tin của khách hàng đã được cập nhật thành công!")
                 else:
+                    print("Ngày không hợp lệ!")
                     status = 'No'
-                objUser={
-                    'SoPhong': Number[i],
-                    'TenKhach': NameVisitorsCheck[i],
-                    'Sdt': PhoneNumber[i],
-                    'GiayTo': Info[i],
-                    'NgayDat': DateTakeRoom[i].strftime('%Y-%m-%d'),
-                    'NgayDen': DateCheckIn[i].strftime('%Y-%m-%d'),
-                    'NgayDi': DateCheckOut[i].strftime('%Y-%m-%d'),
-                    'StatusCheck': status
-                }
-                Updated = True
-            else:
-                objUser={
+                    CheckStatus[i] = status
+
+                objUser = {
                     'SoPhong': Number[i],
                     'TenKhach': NameVisitorsCheck[i],
                     'Sdt': PhoneNumber[i],
@@ -241,14 +220,25 @@ def menu6(fileVisitors,fileRoom):
                     'NgayDat': DateTakeRoom[i],
                     'NgayDen': DateCheckIn[i],
                     'NgayDi': DateCheckOut[i],
-                    'StatusCheck': status #Giả sử cho Status bằng yes
+                    'StatusCheck': CheckStatus[i]
                 }
-            Writer.writerow(objUser)
-            # print(objUser)
+                Writer.writerow(objUser)
+                break
+            else:
+                objUser = {
+                    'SoPhong': Number[i],
+                    'TenKhach': NameVisitorsCheck[i],
+                    'Sdt': PhoneNumber[i],
+                    'GiayTo': Info[i],
+                    'NgayDat': DateTakeRoom[i],
+                    'NgayDen': DateCheckIn[i],
+                    'NgayDi': DateCheckOut[i],
+                    'StatusCheck': CheckStatus[i]
+                }
+                Writer.writerow(objUser)
+
         if not Updated:
-            print(erB,erF,"Không tìm thấy khách hàng nào trong danh sách.",RESETs)
-        else:
-            print(colorF,"Cập nhật thông tin thành công.")
+            print("Không tìm thấy khách hàng nào trong danh sách.")
     del Number,NameVisitorsCheck,PhoneNumber,Info,DateTakeRoom,DateCheckIn,DateCheckOut,
 #  khach nhan phong
 def CheckDate(Date_To_Check,Start_Date,End_Date):

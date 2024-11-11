@@ -1,3 +1,4 @@
+from Thanhtung import*
 from LeVuong import*
 from BuiTuan import*
 from Setting import*
@@ -279,30 +280,23 @@ def menu15(file,fomat):
      else:
           print(f'{RESETs+colorB}Lỗi xóa nhân viên :(({RESETs}')
   
-def menu16(file):
+def menu16(file_NhanVien):
      System.Clear()
      # xem danh sach nhan vien
      print(TextMenu(2,'Xem danh sách nhân viên'))
-     with open(file,'r',newline='',encoding='utf-8') as  file:
-          next(file) # bo qua dong dau
-          length=file.readline()# check  do dai  file
-          if length> '0':
+     with open(file_NhanVien,'r',newline='',encoding='utf-8') as  file:
                render=csv.DictReader(file)
                print(f'{colorF}MaNv\tHoTen\t\tChucVu\tSdt\tNgayThamGia{RESETs}')
                for data  in  render:
-                    Ma=data['MaNv']
-                    HoTen=data['HoTen']
-                    ChucVu=data['ChucVu']
-                    Sdt=data['Sdt']
-                    NgayThamgia=data['NgayThamGia']
-                    print(f'{Ma}\t{HoTen}\t{ChucVu}\t{Sdt}\t{NgayThamgia}')
-          else:
-                    print(f'\t\t   {RESETs+color_bar}Danh Sách Trống rỗng !{RESETs}')
-                    quit;       
+                    Ma = data['MaNv']
+                    HoTen = data['HoTen']
+                    ChucVu = data['ChucVu']
+                    Sdt = data['Sdt']
+                    NgayThamgia = data['NgayThamGia']
+                    print(f'{Ma}\t{HoTen}\t{ChucVu}\t{Sdt}\t{NgayThamgia}')   
 def error():
      System.Clear()
      print(f'{erF}Lựa chọn {erB+erF}không hợp lệ !{RESETs}')
-
     
 '''Đường đân file các đường dẫn liên quan đến color và fomat được nằm trong setting.py(def main) 
 AutoFile sẽ kiểm tra để viết lại file
@@ -310,9 +304,7 @@ AutoColor sẽ được kiểm tra nếu file không tồn tại
 '''
 if  __name__=='__main__':
 #  File Main  khi chạy nó sẽ chạy file Setting.py (  function main() -->  đầu tiên để check thông tin trước.)
-#////Claer trong termial
-     # file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
-
+     #////Claer trong termial
      System.Clear()
      options={
           1: lambda: menu1(file_phong),
