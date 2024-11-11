@@ -16,26 +16,26 @@ def TextMenu(choce,text_small):
           text=f'''
 {color_bar}==================== {colorB_logo+colorF_logo}All Menu{RESETs+color_bar} ====================
 
-{colorF_logo+colorB_logo}0. {RESETs+colorF_logo}Thoát chương trình
-{colorF_logo+colorB_logo}1. {RESETs+colorF_logo}Thêm phòng mới
-{colorF_logo+colorB_logo}2. {RESETs+colorF_logo}Sửa thông tin phòng
-{colorF_logo+colorB_logo}3. {RESETs+colorF_logo}Xóa phòng
-{colorF_logo+colorB_logo}4. {RESETs+colorF_logo}Xem danh sách phòng
-{colorF_logo+colorB_logo}5. {RESETs+colorF_logo}Hiện  thị  các phòng trống
-{colorF_logo+colorB_logo}6. {RESETs+colorF_logo}Sửa thông tin khách hàng
-{colorF_logo+colorB_logo}7. {RESETs+colorF_logo}Xem danh sách khách hàng
-{colorF_logo+colorB_logo}8. {RESETs+colorF_logo}Đặt phòng mới
-{colorF_logo+colorB_logo}9. {RESETs+colorF_logo}Hủy đặt phòng
-{colorF_logo+colorB_logo}10. {RESETs+colorF_logo}Nhận phòng
-{colorF_logo+colorB_logo}11. {RESETs+colorF_logo}Trả phòng
-{colorF_logo+colorB_logo}12. {RESETs+colorF_logo}Xem danh sách đặt phòng
-{colorF_logo+colorB_logo}13. {RESETs+colorF_logo}Thêm nhân viên mới
-{colorF_logo+colorB_logo}14. {RESETs+colorF_logo}Sửa thông tin nhân viên
-{colorF_logo+colorB_logo}15. {RESETs+colorF_logo}Xóa nhân viên
-{colorF_logo+colorB_logo}16. {RESETs+colorF_logo}Xem danh sách nhân viên
-{colorF_logo+colorB_logo}17. {RESETs+colorF_logo}Hiển thị báo cáo doanh thu chi tiết.{RESETs+colorF_logo}
-{colorF_logo+colorB_logo}18. {RESETs+colorF_logo}Setting
-{colorF_logo+colorB_logo}19. {RESETs+colorF_logo}About
+{colorF_logo+colorB_logo}0. {RESETs+colorF}Thoát chương trình
+{colorF_logo+colorB_logo}1. {RESETs+colorF}Thêm phòng mới
+{colorF_logo+colorB_logo}2. {RESETs+colorF}Sửa thông tin phòng
+{colorF_logo+colorB_logo}3. {RESETs+colorF}Xóa phòng
+{colorF_logo+colorB_logo}4. {RESETs+colorF}Xem danh sách phòng
+{colorF_logo+colorB_logo}5. {RESETs+colorF}Hiện  thị  các phòng trống
+{colorF_logo+colorB_logo}6. {RESETs+colorF}Sửa thông tin khách hàng
+{colorF_logo+colorB_logo}7. {RESETs+colorF}Xem danh sách khách hàng
+{colorF_logo+colorB_logo}8. {RESETs+colorF}Đặt phòng mới
+{colorF_logo+colorB_logo}9. {RESETs+colorF}Hủy đặt phòng
+{colorF_logo+colorB_logo}10. {RESETs+colorF}Nhận phòng
+{colorF_logo+colorB_logo}11. {RESETs+colorF}Trả phòng
+{colorF_logo+colorB_logo}12. {RESETs+colorF}Xem danh sách đặt phòng
+{colorF_logo+colorB_logo}13. {RESETs+colorF}Thêm nhân viên mới
+{colorF_logo+colorB_logo}14. {RESETs+colorF}Sửa thông tin nhân viên
+{colorF_logo+colorB_logo}15. {RESETs+colorF}Xóa nhân viên
+{colorF_logo+colorB_logo}16. {RESETs+colorF}Xem danh sách nhân viên
+{colorF_logo+colorB_logo}17. {RESETs+colorF}Hiển thị báo cáo doanh thu chi tiết.{RESETs+colorF}
+{colorF_logo+colorB_logo}18. {RESETs+colorF}Setting
+{colorF_logo+colorB_logo}19. {RESETs+colorF}About
 
 '''
      elif choce==2:
@@ -45,18 +45,6 @@ def TextMenu(choce,text_small):
      else:
           pass
      return text
-
-def check(file):
-     if os.path.exists(file):
-          return( file)
-def AutoFile(file,fomat):
-     if check(file):
-          pass
-     else:
-          with open(file,'a+',newline='',encoding='utf-8')as filecsv:
-               format=fomat
-               writer=csv.DictWriter(filecsv,fieldnames=format)
-               writer.writeheader()
 def INput(Type,Text,index):
      while  True:
           try:  
@@ -82,7 +70,7 @@ def check_Date(text):
                else:
                     print(f'{colorF}Định dạng Năm-Tháng-Ngày\n{erF}Vui Lòng Nhập Lại{RESETs}')
           except:
-               print(f'{erB}Cú Pháp Sai :((')
+               print(f'{erB}Cú Pháp Sai :(({RESETs}')
      return text
 
                
@@ -239,7 +227,7 @@ def menu13(file,fomat):
      while True:
           check,Ma=check_MaNv(file,fomat)
           if(check):
-               print(f'\t{color_bar}Mã Nv Tồn tại! \n\t{erF}Nhập lại mã Nv{RESETs}')
+               print(f'\t{erF}Mã Nv Tồn tại! \n\t{erF}Nhập lại mã Nv{RESETs}')
           else:
                pass
                break;
@@ -310,71 +298,22 @@ def menu16(file):
                     print(f'{Ma}\t{HoTen}\t{ChucVu}\t{Sdt}\t{NgayThamgia}')
           else:
                     print(f'\t\t   {RESETs+color_bar}Danh Sách Trống rỗng !{RESETs}')
-                    quit;
-def read_Table_color():
-     with open(file_Setting,'r') as f:
-          data=json.load(f)
-          return data
-def setting(file_setting):
-     System.Clear()
-     data_Setting=read_Table_color()
-     print('[1]Version\n[2]Setting\n[3]About')
-     nhap=INput(int,'Nhập ',2)
-     if nhap==1:
-          System.Clear()
-          version='TVT_2.00'
-          print(f'\n\nVersion: {version}\n\n')
-     elif nhap==2:
-          print(f'''
-{colorB_logo+colorF_logo}[1]{colorF_logo}Font_Color
-{colorB_logo+colorF_logo}[2]{colorF_logo}Back_Color
-{colorB_logo+colorF_logo}[3]{colorF_logo}Font_ERROR
-{colorB_logo+colorF_logo}[2]{colorF_logo}Back_ERROR
-{colorB_logo+colorF_logo}[4]{colorF_logo}Delay_logo
-{colorB_logo+colorF_logo}[5]{colorF_logo}Delay_about       
-               ''')
-          nhap=INput(int,f'Lựa chọn',2)
-          if nhap==1:
-               for c,color in enumerate(data_Setting['Tabale']['Font'].values()):
-                    print(f'[{c}]{color}')
-               
-               font_color=INput(int,f'Chọn màu chữ',2)
-               font_color=f'F{font_color}'
-               data_Setting['Tabale']['Font'][font_color]=font_color
-               
-def Auto_Color():
-     if check(file_Setting):
-          pass
-     else:
-          with open(file_Setting,'w+')as f:
-               ob={"Setting": {"Font_Color": "F5", "Font_ERROR": "F2", "Back_Color": "B0", "Back_ERROR": "B4"}, "Delay": {"Time_logo": 0.025, "Time_About": 0.025}, "Tabale": {"Font": {"0": "Mac dinh", "1": "Black", "2": "Red", "3": "Green", "4": "yellow", "5": "Blue", "6": "Magenta", "7": "Cyan", "8": "White"}, "Back": {"0": "Mac dinh", "1": "Black", "2": "Red", "3": "Green", "4": "yellow", "5": "Blue", "6": "Magenta", "7": "Cyan", "8": "White"}}}
-               json.dump(ob,f,indent=4);
-         
+                    quit;       
 def error():
      System.Clear()
      print(f'{erF}Lựa chọn {erB+erF}không hợp lệ !{RESETs}')
 
     
+'''Đường đân file các đường dẫn liên quan đến color và fomat được nằm trong setting.py(def main) 
+AutoFile sẽ kiểm tra để viết lại file
+AutoColor sẽ được kiểm tra nếu file không tồn tại
+'''
 if  __name__=='__main__':
-#//// data duong dan chuyen vao
-     file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
-     file_Khach=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
-     file_NhanVien=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\NhanVien.csv'
-     file_Setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'
-
-     fomat_khach=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
-     fomat_phong=['Số phòng','Loại','Giá','Trạng thái']
-     fomat_nhanVien=['MaNv','HoTen','ChucVu','Sdt','NgayThamGia']
-#////Check  file auto tao file
-     AutoFile(file_phong,fomat_phong)
-     AutoFile(file_Khach,fomat_khach)
-     AutoFile(file_NhanVien,fomat_nhanVien)
-     Auto_Color() #auto tao file color
-
+#  File Main  khi chạy nó sẽ chạy file Setting.py (  function main() -->  đầu tiên để check thông tin trước.)
 #////Claer trong termial
+     # file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+
      System.Clear()
-     
-#////All Menu 16,8,4,15,12,13
      options={
           1: lambda: menu1(file_phong),
           2: lambda: menu2(file_phong),
@@ -393,30 +332,22 @@ if  __name__=='__main__':
           15: lambda: menu15(file_NhanVien,fomat_nhanVien),
           16: lambda: menu16(file_NhanVien),
           17: lambda: menu17(file_phong,file_Khach),
-          18: lambda: setting(file_Setting),
+          18: lambda: setting(file_setting),
           19: lambda: about(),
-     }
-     
-# //////////////////// TEST
-     # setting(file_Setting)
-     
-     
-     
-     
-     
-        
-# ///////////////////////////
-#  ///  about
+     }       
+# /////////////////////////// INTRO LOGO //////////////
+     main()
      for i in  TextMenu(1,''):
           sys.stdout.write(i)
-          sleep(0.009)
+          sleep(time_logo)
      dem=0;
+# ******************************** Open  Script ********************************
      while True:
-          #  update  color
+          color_bar,colorF_logo,colorB_logo,colorF,colorB,erF,erB,RESETs,time_logo,time_about=Update_Color(file_setting)
           dem+=1
           if dem>1:
                print(TextMenu(1,f'{colorB}All Menu{RESETs}'))
-          Nhap=INput(int,f'{colorF}Chọn Chức Năng\n==> {RESETs}',2)
+          Nhap=INput(int,f'{color_bar}Chọn Chức Năng\n==> {RESETs}',2)
           if Nhap == 0:
                System.Clear()
                print(f'{erF}Tạm biệt !{RESETs}') 

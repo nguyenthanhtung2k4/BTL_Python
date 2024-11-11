@@ -38,7 +38,7 @@ def menu3(fileRoom):
             CheckDelete = False
             continue
     if(CheckDelete == False):
-        print(f"Phòng {NumberDel+erB} không tồn tại.",RESETs)
+        print(f"Phòng {NumberDel}{erB} không tồn tại.",RESETs)
 
     with open(fileRoom,'w',encoding='utf-8', newline='') as FileWrite:
         format=['Số phòng','Loại','Giá','Trạng thái']
@@ -246,7 +246,7 @@ def menu6(fileVisitors,fileRoom):
             Writer.writerow(objUser)
             # print(objUser)
         if not Updated:
-            print(erB,erF,"Không tìm thấy khách hàng nào trong danh sách.")
+            print(erB,erF,"Không tìm thấy khách hàng nào trong danh sách.",RESETs)
         else:
             print(colorF,"Cập nhật thông tin thành công.")
     del Number,NameVisitorsCheck,PhoneNumber,Info,DateTakeRoom,DateCheckIn,DateCheckOut,

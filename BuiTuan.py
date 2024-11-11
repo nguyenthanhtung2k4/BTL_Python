@@ -135,9 +135,7 @@ def menu5(file_Phong):
         # Load room data
     room_keys = ['Số phòng', 'Loại', 'Giá', 'Trạng thái']
     room_data = load_data(file_Phong, room_keys)
-    print(room_data)
     print(f'{colorF}Số phòng\t Loại\t  Giá\t Trạng thái{RESETs}')
-    
     for i in range(len(room_data['Số phòng'])):
         phong=room_data['Trạng thái'][i].upper()
         if room_data['Trạng thái'][i].upper().strip() == "NO":

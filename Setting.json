@@ -1,12 +1,11 @@
 {
     "Setting": {
         "Font_Logo": "F4",
-        "Bar_Logo": "F6",
         "Back_Logo": "B0",
-        "Font_Color": "F7",
+        "Font_Color": "F8",
+        "Back_Color": "B1",
         "Font_ERROR": "F2",
-        "Back_Color": "B0",
-        "Back_ERROR": "B4"
+        "Back_ERROR": "B5"
     },
     "Delay": {
         "Time_logo": 0.0025,
@@ -14,19 +13,19 @@
     },
     "Tabale": {
         "Font": {
-            "0": "Mac dinh",
+            "0": "Blue",
             "1": "Black",
             "2": "Red",
             "3": "Green",
             "4": "yellow",
-            "5": "Blue",
+            "5": "Mac dinh",
             "6": "Magenta",
             "7": "Cyan",
             "8": "White"
         },
         "Back": {
-            "0": "Mac dinh",
-            "1": "Black",
+            "0": "Black",
+            "1": "Mac dinh",
             "2": "Red",
             "3": "Green",
             "4": "yellow",

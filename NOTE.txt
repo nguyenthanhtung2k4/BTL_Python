@@ -1,4 +1,8 @@
-
+Thuộc tinh: Trong file phong
+     Số phòng,
+     Loại : To,doi,don
+     Giá,
+     Trạng thái : No/Yes (No: Khong | Yes: Co)
 Thuộc tính : trong file khach.csv
      SoPhong: số phong
      TenKhach: Tên khách hàng ( in hoa)
