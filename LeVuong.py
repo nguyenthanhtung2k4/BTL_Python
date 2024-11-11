@@ -1,10 +1,11 @@
 import csv
 from datetime import datetime
 from pystyle import System
+from Setting import*
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
     System.Clear()
-    NumberDel = int(input(f"Nhap So phong ban can xoa: "))
+    NumberDel = int(input(f'{colorF}Nhap So phong ban can xoa: '))
     Number=[]
     cost=[]
     TypeRoom=[]
@@ -30,14 +31,14 @@ def menu3(fileRoom):
             del cost[i]
             del TypeRoom[i]
             del status[i]
-            print(f"Phòng {NumberDel} đã bị xóa.")
+            print(f'{colorF}Phòng {NumberDel} {erF}đã bị xóa.',RESETs)
             CheckDelete = True
             break
         else:
             CheckDelete = False
             continue
     if(CheckDelete == False):
-        print(f"Phòng {NumberDel} không tồn tại.")
+        print(f"Phòng {NumberDel+erB} không tồn tại.",RESETs)
 
     with open(fileRoom,'w',encoding='utf-8', newline='') as FileWrite:
         format=['Số phòng','Loại','Giá','Trạng thái']
@@ -73,7 +74,7 @@ def menu11(fileRoom, fileVisitors):
     # room_costs = {}
     
     # Nhập số phòng muốn check out
-    print("Nhập số phòng bạn muốn check out: ")
+    print(colorF,"Nhập số phòng bạn muốn check out: ")
     RoomNumber = int(input().strip())
     
     # Đọc dữ liệu từ file khách hàng
@@ -104,13 +105,13 @@ def menu11(fileRoom, fileVisitors):
             
     # Kiểm tra phòng có tồn tại và đã được nhận chưa
     if RoomNumber not in Number:
-        print(f"Phòng {RoomNumber} không tồn tại trong danh sách khách hàng.")
+        print(f"{RESETs}Phòng {RoomNumber} {erF}không tồn tại trong danh sách khách hàng.{RESETs}")
         return
     
     visitors_index = Number.index(RoomNumber) # index khach hang
     room_index=Room.index(RoomNumber) # index  phong
     if Status_Visitors[visitors_index] != "Yes":
-        print(f"Phòng {RoomNumber} đã có khách đặt phòng trước \nVui lòng kiểm tra lại!")
+        print(f"{erF}Phòng {RoomNumber} đã có khách đặt phòng trước \nVui lòng kiểm tra lại!{RESETs}")
         return
 
     # Tính số tiền cần thanh toán
@@ -120,7 +121,7 @@ def menu11(fileRoom, fileVisitors):
     total_cost=days_stayed*Room[room_index]
 
     # Cập nhật trạng thái phòng
-    print(f"Phòng {RoomNumber} đã trả phòng.\nSố tiền cần thanh toán là: {total_cost} $")
+    print(f"{RESETs}Phòng {RoomNumber} đã trả phòng.\n{RESETs}Số tiền cần thanh toán là: {erB}{total_cost} ${RESETs}")
     # Cap  nhat lai  trang thai phong
     Status[room_index] = "No"
     with open(fileRoom, 'w', encoding='utf-8', newline='') as f:
@@ -199,7 +200,7 @@ def menu6(fileVisitors,fileRoom):
                         DateTakeRoom[i] = datetime.strptime(DateTakeRoomInput, '%Y-%m-%d')
                         break  # Thoát vòng lặp nếu đúng định dạng
                     except ValueError:
-                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
 
                 while True:
                     DateCheckInInput = input("Nhập ngày đến (yyyy-mm-dd): ")
@@ -207,7 +208,7 @@ def menu6(fileVisitors,fileRoom):
                         DateCheckIn[i] = datetime.strptime(DateCheckInInput, '%Y-%m-%d')
                         break
                     except ValueError:
-                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
 
                 while True:
                     DateCheckOutInput = input("Nhập ngày đi (yyyy-mm-dd): ")
@@ -215,7 +216,7 @@ def menu6(fileVisitors,fileRoom):
                         DateCheckOut[i] = datetime.strptime(DateCheckOutInput, '%Y-%m-%d')
                         break
                     except ValueError:
-                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
                 if(CheckDate(DateTake,DateCheckIn[i],DateCheckOut[i])):
                     status = 'Yes'
                 else:
@@ -245,9 +246,9 @@ def menu6(fileVisitors,fileRoom):
             Writer.writerow(objUser)
             # print(objUser)
         if not Updated:
-            print("Không tìm thấy khách hàng nào trong danh sách.")
+            print(erB,erF,"Không tìm thấy khách hàng nào trong danh sách.")
         else:
-            print("Cập nhật thông tin thành công.")
+            print(colorF,"Cập nhật thông tin thành công.")
     del Number,NameVisitorsCheck,PhoneNumber,Info,DateTakeRoom,DateCheckIn,DateCheckOut,
 #  khach nhan phong
 def CheckDate(Date_To_Check,Start_Date,End_Date):
@@ -293,7 +294,7 @@ def menu10(fileVisitors):
             print("Phòng đã được nhận")
             return
     except ValueError:
-        print("Số phòng không tồn tại")
+        print(erF,"Số phòng không tồn tại",RESETs)
         return
     #  Cap nhap  lai  status nhan phong
     Status[room_index]="Yes"
@@ -316,8 +317,8 @@ def menu10(fileVisitors):
                 'StatusCheck': Status[i]
             }
             Writer.writerow(objVisitors)
-    print("Phòng ",room_number," đã được nhận")
-    print("Chúc quý khách ",NameVisitors[room_index]," có một ngày tuyệt vời!")
+    print(erB,"Phòng ",room_number," đã được nhận",RESETs)
+    print(erF,"Chúc quý khách ",NameVisitors[room_index]," có một ngày tuyệt vời!")
     del  Number,NameVisitors,PhoneNumber,Info,CheckOrder,DateCheckIn,DateCheckOut,Status,
 # Xem bao cao doanh thu 
 def menu17(fileRoom,fileVisitors):
@@ -365,5 +366,11 @@ def menu17(fileRoom,fileVisitors):
             totalCost+=thu
     print("\n\nĐã thu: ",totalCost-totalThu,' $')
     print("Chưa thu: ",totalThu," $")
-    print("\tTổng doanh thu: ",totalCost," $")
+    print(f"{erB}\tTổng doanh thu: ",RESETs,totalCost," $")
     del  Number_RoomVisitors ,Name,PhoneNumber,Info,DateCheckIn,DateCheckOut,Status ,
+# if  __name__=='__main__':
+# #//// data duong dan chuyen vao
+#      file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+#      file_Khach=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
+#      file_NhanVien=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\NhanVien.csv'
+#      file_Setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'

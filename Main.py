@@ -380,8 +380,10 @@ def Update_Color():
                     Back_ERROR =b[j]
                if Back_Logo==j:
                     Back_Logo=b[j]
-                    
-          return Font_Logo,Back_Logo,Bar_Logo ,Font_color,Back_color,Font_ERROR,Back_ERROR;
+     Back_RESET="\033[49m";Font_RESET="\033[39m"
+     RESETS=Back_RESET+Font_RESET         
+     return Font_Logo,Back_Logo,Bar_Logo ,Font_color,Back_color,Font_ERROR,Back_ERROR,RESETS;
+
 def read_Table_color():
      with open(file_Setting,'r') as f:
           data=json.load(f)
@@ -467,11 +469,9 @@ if  __name__=='__main__':
           18: lambda: setting(file_Setting),
           19: lambda: about(),
      }
-     Back_RESET="\033[49m";Font_RESET="\033[39m"
-     RESETs=Back_RESET+Font_RESET
 # //////  update color
      # Update_Color()
-     colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
+     colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB,RESETs=Update_Color()
      # print(colorF,colorB,erF,erB)
 # //////////////////// TEST
      # setting(file_Setting)
@@ -480,15 +480,8 @@ if  __name__=='__main__':
      
      
      
-     
-     
-     
-     
-     
-     
-     
+        
 # ///////////////////////////
-     
 #  ///  about
      for i in  TextMenu(1,''):
           sys.stdout.write(i)
@@ -502,8 +495,6 @@ if  __name__=='__main__':
           Nhap=INput(int,f'{colorF}Chọn Chức Năng\n==> {RESETs}',2)
           if Nhap == 0:
                System.Clear()
-               print(f'{erF}Tạm biệt !{Back_RESET+Font_RESET}') 
+               print(f'{erF}Tạm biệt !{RESETs}') 
                break;
           options.get(Nhap,lambda: error())()
-
-#  chinh  setting +  menu chx xog

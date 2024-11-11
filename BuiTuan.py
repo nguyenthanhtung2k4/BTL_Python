@@ -1,7 +1,7 @@
 import csv
 import os
 from datetime import datetime
-
+from Setting import*
 def check(file):
     return os.path.exists(file)
 def load_data(file, keys):
@@ -13,7 +13,7 @@ def load_data(file, keys):
                 for key in keys:
                     data[key].append(row[key])
     else:
-        print(f'File {file} không tồn tại!')
+        print(f'{erF}File {file}{erB}không tồn tại!{RESETs}')
     return data
 
 def save_data(file, data):
@@ -24,7 +24,7 @@ def save_data(file, data):
         for i in range(len(data[next(iter(keys))])):
             row = {key: data[key][i] for key in keys}
             writer.writerow(row)
-    print(f"Đã lưu dữ liệu vào file {file} thành công!")
+    print(f'{colorF}Đã lưu dữ liệu vào file {file} thành công!')
 def load_data_khach_hang(file,keys, phong):
     data={key: [] for key in keys}
     if check(file):
@@ -35,7 +35,7 @@ def load_data_khach_hang(file,keys, phong):
                     if(row[key]!=phong):
                         data[key].append(row[key])
     else:
-        print(f'File {file} không tồn tại!')
+        print(f'{erF}File {file} không tồn tại!{RESETs}')
     return data
 
 # def menu1(file_Phong):
@@ -74,14 +74,15 @@ def menu1(file_phong):
                 loai.append(row['Loại'])
                 gia.append(row['Giá'])
                 status.append(row['Trạng thái'])
-        print("Nhập thông tin của phòng muốn thêm:")
-        phong=input("Số phòng: ")
-        pl=input("Loại phòng: ")
-        money=input("Giá thuê: ")
-        tt=input("Tình trạng: ")
+        print(colorF,"Nhập thông tin của phòng muốn thêm:")
+        phong=input(f'{colorF+colorB}Số phòng:')
+        pl=input(f'{colorF+colorB}Loại phòng:')
+        money=input(f'{colorF+colorB}Giá thuê:')
+        # tt=input("Tình trạng: ")
+        tt="No"
         for i in range(len(so)):
             if so[i]==phong:
-                print("Phòng bạn nhập đã có vui lòng nhập lại thông tin phòng cần thêm!")
+                print(erF,"Phòng bạn nhập đã có vui lòng nhập lại thông tin phòng cần thêm!",)
                 return menu1(file_phong)
                 
             if i==len(so)-1:
@@ -107,7 +108,7 @@ def menu1(file_phong):
                     'Trạng thái':status[i]
                 }
                 WriteF.writerow(obj)
-            print("Đã thêm thông tin phòng thành công!")
+            print(colorF,"Đã thêm thông tin phòng thành công!")
     else:
         print('File khong ton tai!')
     del so,loai,gia,status
@@ -123,22 +124,24 @@ def menu2(file_Phong):
         room_data['Loại'][index]=input(f'Nhập loại phòng mới: ')
         room_data['Giá'][index]=input(f'Nhập Giá mới: ')
         room_data['Trạng thái'][index] = input(f"Nhập trạng thái mới của phòng {so_phong}: ")
-        save_data('Phong.csv', room_data)
-        print("Đã thay đổi trạng thái phòng thành công!")
+        save_data(file_Phong, room_data)
+        print(colorF,"Đã thay đổi trạng thái phòng thành công!")
         del room_data
     else:
-        print("Số phòng bạn nhập không tồn tại, hãy nhập lại!")
+        print(erF,"Số phòng bạn nhập không tồn tại, hãy nhập lại!",RESETs)
         menu2(file_Phong)
-        
-        
+
 def menu5(file_Phong):
         # Load room data
     room_keys = ['Số phòng', 'Loại', 'Giá', 'Trạng thái']
     room_data = load_data(file_Phong, room_keys)
+    print(room_data)
+    print(f'{colorF}Số phòng\t Loại\t  Giá\t Trạng thái{RESETs}')
+    
     for i in range(len(room_data['Số phòng'])):
         phong=room_data['Trạng thái'][i].upper()
-        if phong!= "YES":
-            print(f"{room_data['Số phòng'][i]}\t{room_data['Loại'][i]}\t{room_data['Giá'][i]}\t{room_data['Trạng thái'][i]}")
+        if room_data['Trạng thái'][i].upper().strip() == "NO":
+            print(f"{room_data['Số phòng'][i]}\t\t{room_data['Loại'][i]}\t{room_data['Giá'][i]}\t{room_data['Trạng thái'][i].upper()}")
     del room_data
         
 def menu7(file_KhachHang):
@@ -146,7 +149,7 @@ def menu7(file_KhachHang):
     customer_keys = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo', 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
     customer_data = load_data(file_KhachHang, customer_keys)
 
-    print("Số phòng\tTên Khách\tSĐT\tGiấy tờ")
+    print(colorF,"Số phòng\tTên Khách\tSĐT\tGiấy tờ",RESETs)
     for i in range(len(customer_data['SoPhong'])):
         print(f"{customer_data['SoPhong'][i]}\t{customer_data['TenKhach'][i]}\t{customer_data['Sdt'][i]}\t{customer_data['GiayTo'][i]}")
     del customer_data
@@ -155,22 +158,22 @@ def menu9(file_KhachHang):
     # Load booking data
     booking_keys = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo' , 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
     booking_data = load_data(file_KhachHang, booking_keys)
-    phong=input("Số phòng muốn hủy: ")
+    phong=input(f'{erF}Số phòng muốn hủy:')
     if phong in booking_data['SoPhong']:
         index= booking_data['SoPhong'].index(phong)
         
         data=load_data_khach_hang(file_KhachHang,booking_keys,phong)
         save_data(file_KhachHang,data)
-        print('Đã hủy phòng thành công!')
+        print(erB,'Đã hủy phòng thành công!',RESETs)
     else:
-        print("Số phòng chưa có ai đặt!")
+        print(erF,"Số phòng chưa có ai đặt!",RESETs)
     del booking_data
 def menu14(file_NhanVien):
         # Load employee data
     employee_keys = ['MaNv', 'HoTen', 'ChucVu', 'Sdt', 'NgayThamGia']
     employee_data = load_data(file_NhanVien, employee_keys)
 
-    ma_nv = input("Nhập mã nhân viên cần thay đổi: ")
+    ma_nv = input(f'{colorF}Nhập mã nhân viên cần thay đổi: ')
     if ma_nv in employee_data['MaNv']:
         index = employee_data['MaNv'].index(ma_nv)
         print("Nhập thông tin nhân viên cần thay đổi:")
@@ -178,8 +181,8 @@ def menu14(file_NhanVien):
         employee_data['ChucVu'][index] = input("Chức vụ: ")
         employee_data['Sdt'][index] = input("Số điện thoại: ")
         employee_data['NgayThamGia'][index] = input("Ngày tham gia: ")
-        save_data('NhanVien.csv', employee_data)
-        print("Đã thay đổi thông tin nhân viên thành công!")
+        save_data(file_NhanVien, employee_data)
+        print("Đã thay đổi thông tin nhân viên thành công!",RESETs)
         del employee_data
     else:
         print("Mã nhân viên bạn nhập không tồn tại, vui lòng nhập lại!")
