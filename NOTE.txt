@@ -1,12 +1,3 @@
-Việc cần làm:
-          Kết nối lại  menu  còn thiếu
-          nâng cấp lên tikiner
-          
-
-
-
-
-
 
 Thuộc tính : trong file khach.csv
      SoPhong: số phong

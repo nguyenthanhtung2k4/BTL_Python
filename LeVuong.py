@@ -1,96 +1,11 @@
-import math
-from datetime import datetime #Lấy date
 import csv
+from datetime import datetime
 from pystyle import System
-# from Main import Update_Color # lay mau color
-# colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
-# vuong:  11,3,10,6,17
-
-# 11.Trả phòng: Xác nhận khách đã trả phòng, tính toán số tiền cần thanh toán.
-def menu11(fileRoom,fileVisitors):
-    System.Clear()
-    CheckStatus = True
-    # Check phòng đã nhận phòng hay chưa
-    Number = []
-    Name =[]
-    PhoneNumber=[]
-    Info=[]
-    DateTakeRoom =[]
-    DateCheckIn=[]
-    DateCheckOut=[]
-    Status_Visitors=[]
-
-    cost =[]
-    sum =0
-    Number_room =[]
-    Status=[]
-    print("Nhap so phong ban muon check out: " )
-    RoomNumber = int(input())
-    with open(fileVisitors,'r', encoding='utf-8') as File:
-        ReadF = csv.DictReader(File)
-        for row in ReadF:
-            Number_Room = int(row['SoPhong'])
-            Name_Visitor = str(row['TenKhach'])
-            Phone_Visitor = int(row['Sdt'])
-            Info_Visitor = str(row['GiayTo'])
-            DateTake_Room = datetime.strptime(row['NgayDat'], '%Y-%m-%d')
-            DateCheck_In = datetime.strptime(row['NgayDen'], '%Y-%m-%d')
-            DateCheck_Out = datetime.strptime(row['NgayDi'], '%Y-%m-%d')
-            Status_room = str(row['StatusCheck'])
-            
-            Number.append(Number_Room) #Lay so phong file khachang
-            Name.append(Name_Visitor)
-            PhoneNumber.append(Phone_Visitor)
-            Info.append(Info_Visitor)
-            DateTakeRoom.append(DateTake_Room)
-            DateCheckIn.append(DateCheck_In)
-            DateCheckOut.append(DateCheck_Out)
-            Status_Visitors.append(Status_room)
-        with open(fileRoom,'r',encoding='utf-8') as f:
-            ReadF = csv.DictReader(f)
-            for row in ReadF:
-                Cost = row['Giá']
-                cost.append(Cost)
-                Number_room .append(row['Số phòng']) #Lay so phong trong file phong
-        for i in range(0,len(Number),1):
-            if(RoomNumber == int(Number[i])):
-                # print(True)
-                if(int(Number[i]) == int(Number_room[i])): #Kiểm tra điều kiện và nhớ chuyển dữ liệu thành int 
-                    # print (True)
-                        if(Status_Visitors[i] != "Yes"):
-                            print(f"Phòng {RoomNumber} đã có khách trả phòng, vui lòng chuyển đến phòng khác.")
-                            return
-                        else:
-                            day = DateCheckOut[i] - DateCheckIn[i] #Tính số ngày trả phòng
-                            sum = day.days * int(cost[i]) #Lay so ngay nhan voi cost
-                            print(f"Phòng {RoomNumber} đã trả phòng. Số tiền cần thanh toán là: {sum} $")
-                            Status_Visitors[i] = "No"
-                            CheckStatus = False
-                            break
-                else:
-                    print(f"Phòng {RoomNumber} không tồn tại.")
-                    # print(False)
-                    return
-    with open(fileVisitors,'w',encoding='utf-8') as f:
-        WriteF = csv.DictWriter(f,fieldnames=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck'])
-        WriteF.writeheader()
-        for i in range(len(Number)):
-            obj={
-                'SoPhong':Number[i],
-                'TenKhach':Name[i],
-                'Sdt':PhoneNumber[i],
-                'GiayTo':Info[i],
-                'NgayDat':DateTakeRoom[i].strftime('%Y-%m-%d'),
-                'NgayDen':DateCheckIn[i].strftime('%Y-%m-%d'),
-                'NgayDi':DateCheckOut[i].strftime('%Y-%m-%d'),
-                'StatusCheck':Status_Visitors[i]
-            }
-            WriteF.writerow(obj)
-
+from Setting import*
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
     System.Clear()
-    NumberDel = int(input(f"Nhap So phong ban can xoa: "))
+    NumberDel = int(input(f'{colorF}Nhap So phong ban can xoa: '))
     Number=[]
     cost=[]
     TypeRoom=[]
@@ -116,14 +31,14 @@ def menu3(fileRoom):
             del cost[i]
             del TypeRoom[i]
             del status[i]
-            print(f"Phòng {NumberDel} đã bị xóa.")
+            print(f'{colorF}Phòng {NumberDel} {erF}đã bị xóa.',RESETs)
             CheckDelete = True
             break
         else:
             CheckDelete = False
             continue
     if(CheckDelete == False):
-        print(f"Phòng {NumberDel} không tồn tại.")
+        print(f"Phòng {NumberDel+erB} không tồn tại.",RESETs)
 
     with open(fileRoom,'w',encoding='utf-8', newline='') as FileWrite:
         format=['Số phòng','Loại','Giá','Trạng thái']
@@ -141,78 +56,109 @@ def menu3(fileRoom):
                 'Giá':Cost,
                 'Trạng thái':Status
             }) #Lưu thành các cột
-        
-
-
-#10 Nhận phòng : Xác nhận khách đã nhận phòng.
-def CheckDate(Date_To_Check,Start_Date,End_Date):
-    # Kiểm tra nếu ngày nằm trong khoảng giữa start_date và end_date
-    if (Start_Date <= Date_To_Check <= End_Date):
-        return True
-    else:
-        return False
-
-def menu10(fileVisitors):
-    System.Clear()
-    Number=[]
-    NameVisitors=[]
-    PhoneNumber=[]
-    Info=[]
-    CheckOrder=[]
-    DateCheckIn=[]
-    DateCheckOut=[]
-    TakeDate = 0
-    with open(fileVisitors,'r',encoding='utf-8') as File:
-        Check = csv.DictReader(File)
-        dateFormat = '%Y-%m-%d'
-        for row in Check:
-            # print(row)
-            Number.append(row['SoPhong'])
-            NameVisitors.append(row['TenKhach'])
-            PhoneNumber.append(row['Sdt'])
+#  tra phong
+def menu11(fileRoom, fileVisitors):
+    # System.Clear()
+    # Cac danh sach luu tru  file  Phong
+    Room=[];Type=[];Cost=[];Status=[]
+    # Các danh sách lưu trữ dữ liệu từ file Khach Hang
+    Number = []
+    Name = []
+    PhoneNumber = []
+    Info = []
+    DateTakeRoom = []
+    DateCheckIn = []
+    DateCheckOut = []
+    Status_Visitors = []
+    #dicstion gia phong
+    # room_costs = {}
+    
+    # Nhập số phòng muốn check out
+    print(colorF,"Nhập số phòng bạn muốn check out: ")
+    RoomNumber = int(input().strip())
+    
+    # Đọc dữ liệu từ file khách hàng
+    with open(fileVisitors, 'r', encoding='utf-8') as File:
+        ReadF = csv.DictReader(File)
+        for row in ReadF:
+            Number.append(int(row['SoPhong']))
+            Name.append(row['TenKhach'])
+            PhoneNumber.append(int(row['Sdt']))
             Info.append(row['GiayTo'])
-            TakeDateCheckIn = datetime.strptime(row['NgayDen'],dateFormat)
-            DateCheckIn.append(TakeDateCheckIn)
-            TakeDateCheckOut = datetime.strptime(row['NgayDi'],dateFormat)
-            DateCheckOut.append(TakeDateCheckOut)
-            TakeDate = datetime.now()
-            TakeCheckOrder = datetime.strptime(row['NgayDat'],dateFormat)
-            CheckOrder.append(TakeCheckOrder)
-            # print (Date, DateCheckIn,DateCheckOut)
-    with open(fileVisitors, 'w', newline='', encoding='utf-8') as File:
-        format = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo', 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
-        Writer = csv.DictWriter(File, fieldnames=format)
-        Writer.writeheader()  # Ghi tiêu đề một lần
-        
-        for i in range(len(DateCheckIn)):
-            if CheckDate(TakeDate, DateCheckIn[i], DateCheckOut[i]):
-                objVisitors = {
+            DateTakeRoom.append(datetime.strptime(row['NgayDat'], '%Y-%m-%d'))
+            DateCheckIn.append(datetime.strptime(row['NgayDen'], '%Y-%m-%d'))
+            DateCheckOut.append(datetime.strptime(row['NgayDi'], '%Y-%m-%d'))
+            Status_Visitors.append(row['StatusCheck'])
+
+    # Đọc giá phòng từ file Phong.csv và lưu vào dictionary với key là số phòng
+    with open(fileRoom, 'r', encoding='utf-8') as f:
+        ReadF = csv.DictReader(f)
+        # for row in ReadF:
+        #     room_number = int(row['Số phòng'])
+        #     cost = int(row['Giá'])
+        #     room_costs[room_number] = cost
+        for row in  ReadF:
+            Room.append(int(row['Số phòng']))
+            Type.append(row['Loại'])
+            Cost.append(int(row['Giá']))
+            Status.append(row['Trạng thái'])
+            
+    # Kiểm tra phòng có tồn tại và đã được nhận chưa
+    if RoomNumber not in Number:
+        print(f"{RESETs}Phòng {RoomNumber} {erF}không tồn tại trong danh sách khách hàng.{RESETs}")
+        return
+    
+    visitors_index = Number.index(RoomNumber) # index khach hang
+    room_index=Room.index(RoomNumber) # index  phong
+    if Status_Visitors[visitors_index] != "Yes":
+        print(f"{erF}Phòng {RoomNumber} đã có khách đặt phòng trước \nVui lòng kiểm tra lại!{RESETs}")
+        return
+
+    # Tính số tiền cần thanh toán
+    check_in_date = DateCheckIn[visitors_index]
+    check_out_date = DateCheckOut[visitors_index]
+    days_stayed = (check_out_date - check_in_date).days
+    total_cost=days_stayed*Room[room_index]
+
+    # Cập nhật trạng thái phòng
+    print(f"{RESETs}Phòng {RoomNumber} đã trả phòng.\n{RESETs}Số tiền cần thanh toán là: {erB}{total_cost} ${RESETs}")
+    # Cap  nhat lai  trang thai phong
+    Status[room_index] = "No"
+    with open(fileRoom, 'w', encoding='utf-8', newline='') as f:
+        room_keys = ['Số phòng', 'Loại', 'Giá', 'Trạng thái']
+        writeF=csv.DictWriter(f, fieldnames=room_keys)
+        writeF.writeheader()
+        for i in range(len(Room)):
+                obj = {
+                    'Số phòng': Room[i],
+                    'Loại': Type[i],
+                    'Giá': Cost[i],
+                    'Trạng thái': Status[i]
+                }
+                writeF.writerow(obj)
+    # Ghi lại dữ liệu vào file khách hàng sau khi cập nhật
+    with open(fileVisitors, 'w', encoding='utf-8', newline='') as f:
+        fieldnames = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo', 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
+        WriteF = csv.DictWriter(f, fieldnames=fieldnames)
+        WriteF.writeheader()
+        for i in range(len(Number)):
+            if i != visitors_index:
+                obj = {
                     'SoPhong': Number[i],
-                    'TenKhach': NameVisitors[i],
+                    'TenKhach': Name[i],
                     'Sdt': PhoneNumber[i],
                     'GiayTo': Info[i],
-                    'NgayDat': CheckOrder[i].date(),
-                    'NgayDen': DateCheckIn[i].date(),
-                    'NgayDi': DateCheckOut[i].date(),
-                    'StatusCheck': 'Yes'
+                    'NgayDat': DateTakeRoom[i].strftime('%Y-%m-%d'),
+                    'NgayDen': DateCheckIn[i].strftime('%Y-%m-%d'),
+                    'NgayDi': DateCheckOut[i].strftime('%Y-%m-%d'),
+                    'StatusCheck': Status_Visitors[i]
                 }
-            else:
-                objVisitors = {
-                    'SoPhong': Number[i],
-                    'TenKhach': NameVisitors[i],
-                    'Sdt': PhoneNumber[i],
-                    'GiayTo': Info[i],
-                    'NgayDat': CheckOrder[i].date(),
-                    'NgayDen': DateCheckIn[i].date(),
-                    'NgayDi': DateCheckOut[i].date(),
-                    'StatusCheck': 'No'
-                }
-            Writer.writerow(objVisitors)  # Ghi dữ liệu từng dòng
-menu10("KhachHang.csv")
-#6.Sửa thông tin khách hàng: Cập nhật thông tin của một khách hàng đã tồn tại.
+                WriteF.writerow(obj)
+    del Room,Type,Cost,Status,Number,Name,PhoneNumber,Info,DateTakeRoom,DateCheckIn,DateCheckOut,Status_Visitors,
+# cap nhap  thong tin khach hang
 def menu6(fileVisitors,fileRoom):
     System.Clear()
-    NameVisitors = str(input("Nhap ten khach hang muon cap nhat: "))
+    InputNumber = str(input("Nhap so phong cap nhat: "))
     Number=[]
     NameVisitorsCheck=[]
     PhoneNumber=[]
@@ -237,12 +183,13 @@ def menu6(fileVisitors,fileRoom):
             DateTakeRoom.append(i['NgayDat'])
             DateCheckIn.append(i['NgayDen'])
             DateCheckOut.append(i['NgayDi'])
-    with open(fileVisitors,'w',encoding='utf-8') as FileWrite:
+            
+    with open(fileVisitors,'w',encoding='utf-8', newline='') as FileWrite:
         format=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
         Writer=csv.DictWriter(FileWrite,fieldnames=format)
         Writer.writeheader()
         for i in range(0,len(Number),1):
-            if(NameVisitors == NameVisitorsCheck[i]):
+            if(InputNumber == Number[i]):
                 print("Nhap thong tin can cap nhat: ")
                 NameVisitorsCheck[i] = str(input("Ten: "))
                 PhoneNumber[i] = str(input("So dien thoai: "))
@@ -253,7 +200,7 @@ def menu6(fileVisitors,fileRoom):
                         DateTakeRoom[i] = datetime.strptime(DateTakeRoomInput, '%Y-%m-%d')
                         break  # Thoát vòng lặp nếu đúng định dạng
                     except ValueError:
-                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
 
                 while True:
                     DateCheckInInput = input("Nhập ngày đến (yyyy-mm-dd): ")
@@ -261,7 +208,7 @@ def menu6(fileVisitors,fileRoom):
                         DateCheckIn[i] = datetime.strptime(DateCheckInInput, '%Y-%m-%d')
                         break
                     except ValueError:
-                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
 
                 while True:
                     DateCheckOutInput = input("Nhập ngày đi (yyyy-mm-dd): ")
@@ -269,7 +216,7 @@ def menu6(fileVisitors,fileRoom):
                         DateCheckOut[i] = datetime.strptime(DateCheckOutInput, '%Y-%m-%d')
                         break
                     except ValueError:
-                        print("Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
+                        print(erF,"Định dạng ngày tháng không hợp lệ. Vui lòng nhập lại.")
                 if(CheckDate(DateTake,DateCheckIn[i],DateCheckOut[i])):
                     status = 'Yes'
                 else:
@@ -299,16 +246,84 @@ def menu6(fileVisitors,fileRoom):
             Writer.writerow(objUser)
             # print(objUser)
         if not Updated:
-            print("Không tìm thấy khách hàng nào trong danh sách.")
+            print(erB,erF,"Không tìm thấy khách hàng nào trong danh sách.")
         else:
-            print("Cập nhật thông tin thành công.")
-# 17 Xem báo cáo doanh thu. Hiển thị báo cáo doanh thu chi tiết.
-def menu17(fileRoom,fileVisitors):
+            print(colorF,"Cập nhật thông tin thành công.")
+    del Number,NameVisitorsCheck,PhoneNumber,Info,DateTakeRoom,DateCheckIn,DateCheckOut,
+#  khach nhan phong
+def CheckDate(Date_To_Check,Start_Date,End_Date):
+    # Kiểm tra nếu ngày nằm trong khoảng giữa start_date và end_date
+    if (Start_Date <= Date_To_Check <= End_Date):
+        return True
+    else:
+        return False
+def menu10(fileVisitors):
     System.Clear()
     Number=[]
-    Type=[]
-    Cost=[]
-    TakeDate = datetime.now()
+    NameVisitors=[]
+    PhoneNumber=[]
+    Info=[]
+    CheckOrder=[]
+    DateCheckIn=[]
+    DateCheckOut=[]
+    Status=[]
+    TakeDate = 0
+    with open(fileVisitors,'r',encoding='utf-8') as File:
+        Check = csv.DictReader(File)
+        dateFormat = '%Y-%m-%d'
+        for row in Check:
+            # print(row)
+            Number.append(row['SoPhong'])
+            NameVisitors.append(row['TenKhach'])
+            PhoneNumber.append(row['Sdt'])
+            Info.append(row['GiayTo'])
+            TakeDateCheckIn = datetime.strptime(row['NgayDen'],dateFormat)
+            DateCheckIn.append(TakeDateCheckIn)
+            TakeDateCheckOut = datetime.strptime(row['NgayDi'],dateFormat)
+            DateCheckOut.append(TakeDateCheckOut)
+            TakeDate = datetime.now()
+            TakeCheckOrder = datetime.strptime(row['NgayDat'],dateFormat)
+            CheckOrder.append(TakeCheckOrder)
+            Status.append(row['StatusCheck'])
+    #  kiem tra phong khach hang.
+    room_number=input("Số phòng nhận: ")
+    room_number=room_number.strip()
+    try:
+        room_index=Number.index(room_number)
+        if (Status[room_index].upper() != 'NO'):
+            print("Phòng đã được nhận")
+            return
+    except ValueError:
+        print(erF,"Số phòng không tồn tại",RESETs)
+        return
+    #  Cap nhap  lai  status nhan phong
+    Status[room_index]="Yes"
+    # Ghi lại dữ liệu vào file sau khi cập nhật trạng thái
+    with open(fileVisitors, 'w', newline='', encoding='utf-8') as File:
+        format = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo', 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
+        Writer = csv.DictWriter(File, fieldnames=format)
+        Writer.writeheader()
+
+        # Ghi dữ liệu từng dòng
+        for i in range(len(Number)):
+            objVisitors = {
+                'SoPhong': Number[i],
+                'TenKhach': NameVisitors[i],
+                'Sdt': PhoneNumber[i],
+                'GiayTo': Info[i],
+                'NgayDat': CheckOrder[i].strftime(dateFormat),
+                'NgayDen': DateCheckIn[i].strftime(dateFormat),
+                'NgayDi': DateCheckOut[i].strftime(dateFormat),
+                'StatusCheck': Status[i]
+            }
+            Writer.writerow(objVisitors)
+    print(erB,"Phòng ",room_number," đã được nhận",RESETs)
+    print(erF,"Chúc quý khách ",NameVisitors[room_index]," có một ngày tuyệt vời!")
+    del  Number,NameVisitors,PhoneNumber,Info,CheckOrder,DateCheckIn,DateCheckOut,Status,
+# Xem bao cao doanh thu 
+def menu17(fileRoom,fileVisitors):
+    System.Clear()
+    cost_day={}
     Number_RoomVisitors =[]
     Name=[]
     PhoneNumber=[]
@@ -316,13 +331,11 @@ def menu17(fileRoom,fileVisitors):
     DateCheckIn=[]
     DateCheckOut=[]
     Status =[]
-    DateTake = datetime.now()
     with open(fileRoom,'r',encoding='utf-8') as File:
         Reader = csv.DictReader(File)
         for i in Reader:
-            Number.append(i['Số phòng'])
-            Type.append(i['Loại'])
-            Cost.append(i['Giá'])
+            room_number=i['Số phòng']
+            cost_day[room_number]=i['Giá']
     with open(fileVisitors,'r',encoding='utf-8') as File:
         Reader = csv.DictReader(File)
         for i in Reader:
@@ -330,50 +343,34 @@ def menu17(fileRoom,fileVisitors):
             Name.append(i['TenKhach'])
             PhoneNumber.append(i['Sdt'])
             Info.append(i['GiayTo'])
-            DateCheckIn.append(i['NgayDen'])
-            DateCheckOut.append(i['NgayDi'])
+            DateCheckIn.append(datetime.strptime(i['NgayDen'], '%Y-%m-%d'))
+            DateCheckOut.append(datetime.strptime(i['NgayDi'], '%Y-%m-%d'))
             Status.append(i['StatusCheck'])
-        with open (fileRoom, 'w', encoding='utf-8') as file:
-            format =['Số phòng','Loại','Giá','Trạng thái']
-            writer = csv.DictWriter (file, fieldnames=format)
-            writer.writeheader()
-            for i in range(len(Number)):
-                if (Number[i] in Number_RoomVisitors and Status[i] == 'Yes' ):
-                    objRoom = {
-                        'Số phòng': Number[i],
-                        'Loại': Type[i],
-                        'Giá': Cost[i],
-                        'Trạng thái': 'Yes'
-                    }
-                else:
-                    objRoom = {
-                        'Số phòng': Number[i],
-                        'Loại': Type[i],
-                        'Giá': Cost[i],
-                        'Trạng thái': 'No'
-                    }
-                writer.writerow(objRoom) #Cập nhật trạng thái của Phong.csv
-    print(f'Doanh Thu la: {Income(fileRoom)}$')
-def Income(fileRoom):
-    Cost = []
-    Return = 0
-    with open(fileRoom,'r',encoding='utf-8') as File:
-        Reader = csv.DictReader(File)
-        for i in Reader:
-            if i['Trạng thái'] == 'Yes':
-                Cost.append(i['Giá'])
-        for i in Cost:
-            Return += int(i)
-        return Return
-
-
-def Main():
-    fileRoom = r'Phong.csv'
-    fileVisitors = r'KhachHang.csv' # Phần đường dẫn file: Nên để là đường dẫn tương đối, tránh để cả đường dẫn tuyệt đối vì OS
-    # menu11(fileRoom,fileVisitors)
-    # menu3(fileRoom)
-    # menu10(fileVisitors)
-    # menu6(fileVisitors,fileRoom)
-    # menu17(fileRoom,fileVisitors)
-    # print('Chương trình đã hoàn thành. Nên mở cmt để chạy test, Kiểm tra các fieldName có đồng nhất với file hay không trước khi test')
-# Main()
+    # Tinh tong doanh thu
+    totalCost,totalThu=0,0
+    for i  in range(len(Number_RoomVisitors)):
+        if Status[i].upper()=="YES":
+            start_day=DateCheckIn[i]
+            end_day=DateCheckOut[i]
+            day = (end_day - start_day).days
+            cost = day * int(cost_day[Number_RoomVisitors[i]])
+            totalCost += cost 
+            print("Phòng ",Number_RoomVisitors[i]," của ",Name[i]," đã thu ",cost," $")
+        else:
+            start_day=DateCheckIn[i]
+            end_day=DateCheckOut[i]
+            day = (end_day - start_day).days
+            thu = day * int(cost_day[Number_RoomVisitors[i]])
+            # print("Phòng ",Number_RoomVisitors[i]," của ",Name[i]," chưa thu ",thu,' $')
+            totalThu+=thu
+            totalCost+=thu
+    print("\n\nĐã thu: ",totalCost-totalThu,' $')
+    print("Chưa thu: ",totalThu," $")
+    print(f"{erB}\tTổng doanh thu: ",RESETs,totalCost," $")
+    del  Number_RoomVisitors ,Name,PhoneNumber,Info,DateCheckIn,DateCheckOut,Status ,
+# if  __name__=='__main__':
+# #//// data duong dan chuyen vao
+#      file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
+#      file_Khach=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
+#      file_NhanVien=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\NhanVien.csv'
+#      file_Setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'

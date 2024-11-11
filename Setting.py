@@ -31,7 +31,7 @@ Chương trình được thiết kế để giúp các khách sạn nâng cao ch
      for  i  in about:
           sys.stdout.write(i)
           sleep(0.025)
-def Update_Color():
+def Update_Color(file_Setting):
      f={
      "F1":"\033[30m"  ,     # black
      "F2":"\033[31m",       # red
@@ -80,8 +80,9 @@ def Update_Color():
                     Back_ERROR =b[j]
                if Back_Logo==j:
                     Back_Logo=b[j]
-                    
-          return Font_Logo,Back_Logo,Bar_Logo ,Font_color,Back_color,Font_ERROR,Back_ERROR;
+          Back_RESET="\033[49m";Font_RESET="\033[39m"
+          RESETs=Back_RESET+Font_RESET    
+          return Font_Logo,Back_Logo,Bar_Logo ,Font_color,Back_color,Font_ERROR,Back_ERROR,RESETs;
 def setting(file_setting):
      System.Clear()
      print('[1]Version\n[2]Setting\n[3]About')
@@ -114,11 +115,8 @@ def setting(file_setting):
                          json.dump(data,file,indent=4)
                          print(f'\n\nFont_Color đã thay đ��i thành {font_color}\n\n')
   
-
-# if __name__=="__main__":
-     # file_Setting='setting.json'
-     # Back_RESET="\033[49m";Font_RESET="\033[39m"
-     # RESETs=Back_RESET+Font_RESET
-     # # upload code
-     # colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB=Update_Color()
-     
+def  main():
+     file_Setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'
+     global colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB,RESETs;
+     colorF_logo,colorB_logo,color_bar, colorF,colorB,erF,erB,RESETs=Update_Color(file_Setting)
+main()
