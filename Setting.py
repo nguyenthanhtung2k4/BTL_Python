@@ -190,10 +190,10 @@ def  main():
      global fomat_khach,fomat_phong,fomat_nhanVien;
      global color_bar, colorF_logo,colorB_logo, colorF,colorB,erF,erB,RESETs,time_logo,time_about;
 #//// data duong dan chuyen vao
-     file_phong=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Phong.csv'
-     file_Khach=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\KhachHang.csv'
-     file_NhanVien=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\NhanVien.csv'
-     file_setting=r'D:\CODE\DNU_PYTHON\BTL\BTL_Python\Setting.json'
+     file_phong='Phong.csv'
+     file_Khach='KhachHang.csv'
+     file_NhanVien='NhanVien.csv'
+     file_setting='Setting.json'
 #  format csv sẽ được khai báo ở đây.
      fomat_khach=['SoPhong','TenKhach','Sdt','GiayTo','NgayDat','NgayDen','NgayDi','StatusCheck']
      fomat_phong=['Số phòng','Loại','Giá','Trạng thái']
