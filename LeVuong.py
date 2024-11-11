@@ -125,7 +125,7 @@ def menu3(fileRoom):
     if(CheckDelete == False):
         print(f"Phòng {NumberDel} không tồn tại.")
 
-    with open(fileRoom,'w',encoding='utf-8') as FileWrite:
+    with open(fileRoom,'w',encoding='utf-8', newline='') as FileWrite:
         format=['Số phòng','Loại','Giá','Trạng thái']
         writer=csv.DictWriter(FileWrite,fieldnames=format) #Lưu thuộc tính vào FileWrite với fieldnames là mảng format
         writer.writeheader() #thuộc tính này nhằm để lưu lại các fieldnames ở trong file
@@ -208,7 +208,7 @@ def menu10(fileVisitors):
                     'StatusCheck': 'No'
                 }
             Writer.writerow(objVisitors)  # Ghi dữ liệu từng dòng
-
+menu10("KhachHang.csv")
 #6.Sửa thông tin khách hàng: Cập nhật thông tin của một khách hàng đã tồn tại.
 def menu6(fileVisitors,fileRoom):
     System.Clear()

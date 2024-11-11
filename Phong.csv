@@ -1,4 +1,5 @@
-Số phòng,Loại,Giá,Trạng thái
-101,Đon,200,Yes
-102,Đôi,234,Yes
-103,Đôi 350,No,
+Số phòng,Loại,Giá,Trạng thái
+101,Đon,200,No 
+102,Đôi,234,Yes
+103,Đôi,350,Yes 
+104,don,400,Yes
