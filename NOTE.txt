@@ -12,3 +12,9 @@ Thuộc tính : trong file khach.csv
      NgayDen: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
      NgayDi: Ngày đặt( int )  kiểu |  năm-Tháng-Ngày 
      StatusCheck: Yes of  No (Yes:  đã nhận | No : Lên Lịch)
+Thuộc tínhL  trong file Nhân Vien
+     MaNv
+     HoTen
+     ChucVu
+     Sdt
+     NgayThamGia

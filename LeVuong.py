@@ -2,7 +2,6 @@ import csv
 from datetime import datetime
 from pystyle import System
 from Setting import*
-from Main import check_Date
 #3 Xóa phòng: Xóa thông tin một phòng khỏi hệ thống.
 def menu3(fileRoom):
     System.Clear()
@@ -59,7 +58,7 @@ def menu3(fileRoom):
             }) #Lưu thành các cột
 #  tra phong
 def menu11(fileRoom, fileVisitors):
-    # System.Clear()
+    System.Clear()
     # Cac danh sach luu tru  file  Phong
     Room=[];Type=[];Cost=[];Status=[]
     # Các danh sách lưu trữ dữ liệu từ file Khach Hang

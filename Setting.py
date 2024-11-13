@@ -35,13 +35,13 @@ def INput(Type,Text,index):
                print(f'{erF}Vui Long nhap dung {erF+erB} ki tu ! {RESETs}\n')                        
 def about():
      System.Clear()
-     about=f'''{RESETs+colorB}
+     about=f'''{RESETs+color_bar+colorB}
 \t\tVề chúng tôi{RESETs+colorF}
 \tChương trình được phát triển bởi các sinh viên Đại Nam phát triển
  - Các sinh viên thực hiện:
-                    Nguyễn Thanh Tùng
-                    Lê Văn Vượng
-                    Bùi Quang Tuấn
+                    {erF}Nguyễn Thanh Tùng{colorF}
+                    {erF}Lê Văn Vượng{colorF}
+                    {erF}Bùi Quang Tuấn{colorF}
 Chương trình được thiết kế để giúp các khách sạn nâng cao chất lượng dịch vụ,tối ưu hóa quy trình hoạt động và tăng doanh thu.Chúng tôi phát triển gồm 20 chức năng để quản lý khách sản một cách tận tiện nhất
 {RESETs}
 '''
@@ -49,6 +49,18 @@ Chương trình được thiết kế để giúp các khách sạn nâng cao ch
           sys.stdout.write(i)
           sleep(time_about)
           
+def check_Date(text):
+     while True:
+          text=input(text)
+          try:
+               y,m,d= map(int,text.split('-'))
+               if  y>=1000 and 1<=m<=12 and  1<=d<=31:
+                    break
+               else:
+                    print(f'{colorF}Định dạng Năm-Tháng-Ngày\n{erF}Vui Lòng Nhập Lại{RESETs}')
+          except:
+               print(f'{erB}Cú Pháp Sai :(({RESETs}')
+     return text
 
 def Update_Color(file_Setting):
      f={
