@@ -68,7 +68,7 @@ if  __name__=='__main__':
           6: lambda: menu6(file_Khach,file_phong),
           7: lambda: menu7(file_Khach),
           8: lambda: menu8(file_phong,file_Khach),
-          9: lambda: menu9(file_Khach),
+          9: lambda: menu9(file_Khach,file_phong),
           10: lambda: menu10(file_Khach),
           11: lambda: menu11(file_phong,file_Khach),
           12: lambda: menu12(file_Khach),
@@ -78,7 +78,7 @@ if  __name__=='__main__':
           16: lambda: menu16(file_NhanVien),# cần nâng cấp thêm chức năng xem tiền lương nhân viên trong file ..
           17: lambda: menu17(file_phong,file_Khach), # cần nâng cấp vấn đề lưu lại lịch sử tính tổng số tiền một cách chính xác và hiểu quả hơn.
           18: lambda: setting(file_setting),
-          19: lambda: about(),
+          19: lambda: About(),
      } 
 # /////////////////////////// INTRO LOGO //////////////
      main()

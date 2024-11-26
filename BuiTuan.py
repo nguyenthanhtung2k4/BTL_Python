@@ -152,20 +152,26 @@ def menu7(file_KhachHang):
         print(f"{customer_data['SoPhong'][i]}\t{customer_data['TenKhach'][i]}\t{customer_data['Sdt'][i]}\t{customer_data['GiayTo'][i]}")
     del customer_data
         
-def menu9(file_KhachHang):
+def menu9(file_KhachHang,filePhong):
     # Load booking data
     booking_keys = ['SoPhong', 'TenKhach', 'Sdt', 'GiayTo' , 'NgayDat', 'NgayDen', 'NgayDi', 'StatusCheck']
+    keyPhong=['Số phòng','Loại','Giá','Trạng thái']
     booking_data = load_data(file_KhachHang, booking_keys)
     phong=input(f'{erF}Số phòng muốn hủy:')
     if phong in booking_data['SoPhong']:
         index= booking_data['SoPhong'].index(phong)
-        
         data=load_data_khach_hang(file_KhachHang,booking_keys,phong)
         save_data(file_KhachHang,data)
-        print(erB,'Đã hủy phòng thành công!',RESETs)
+        dataPhong=load_data(filePhong,keyPhong)
+        if phong in dataPhong['Số phòng']:
+            indexPhong=dataPhong['Số phòng'].index(phong)
+            dataPhong['Trạng thái'][indexPhong]="No"
+            print(erB,'Đã hủy phòng thành công!',RESETs)    
+        save_data(filePhong, dataPhong)
     else:
         print(erF,"Số phòng chưa có ai đặt!",RESETs)
     del booking_data
+    
 def menu14(file_NhanVien):
         # Load employee data
     employee_keys = ['MaNv', 'HoTen', 'ChucVu', 'Sdt', 'NgayThamGia']

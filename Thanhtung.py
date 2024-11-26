@@ -158,7 +158,7 @@ def menu13(file,fomat):
      Ten=INput(str,'Tên Nhân Viên: ',1)
      ChucVu=INput(str,'Chức vụ: ',1)
      Sdt=INput(int,'SĐT: ',1)
-     print("Date Tham Gia (y/m/d)")
+     print("Date Tham Gia (y-m-d)")
      date=check_Date('\tNgày Làm vc: ')
      ob_NhanVien={
           'MaNv':Ma,

@@ -33,7 +33,7 @@ def INput(Type,Text,index):
                return nhap
           except ValueError:
                print(f'{erF}Vui Long nhap dung {erF+erB} ki tu ! {RESETs}\n')                        
-def about():
+def About():
      System.Clear()
      about=f'''{RESETs+color_bar+colorB}
 \t\tVề chúng tôi{RESETs+colorF}
@@ -155,12 +155,16 @@ def setting(file_setting):
 {colorB_logo+colorF_logo}[5]{colorF_logo}Font_Logo  
 {colorB_logo+colorF_logo}[6]{colorF_logo}Back_Logo 
 {colorB_logo+colorF_logo}[7]{colorF_logo}Delay
+{colorB_logo+colorF_logo}[8]{colorF_logo}Exit
      
                ''')
                nhap=INput(int,f'Lựa chọn',2)
                if nhap==1:
                     format='Font'
                     TableColor(file_setting,'Nhập màu Font_Color',format,'F8')
+               elif nhap==8:
+                    System.Clear()
+                    break;
                elif nhap==2:
                     format='Back'
                     TableColor(file_setting,'Nhập màu Back_Color',format,'B1')
@@ -190,7 +194,7 @@ def setting(file_setting):
                                    print(f'\n\nDelay_logo đã thay đ��i thành {nhap}\n\n')
           elif nhap==3:
                System.Clear()
-               about()
+               About();
           else:
                System.Clear()
                Update_Color(file_setting)

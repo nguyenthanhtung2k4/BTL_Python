@@ -1,8 +1,8 @@
 Số phòng,Loại,Giá,Trạng thái
-101,to,200,Yes
-102,doi,200,Yes
-103,to,550,Yes
+101,to,200,No
+102,doi,200,No
+103,to,550,No
 105,don,200,No
 106,don,200,No
-107,to,550,Yes
+107,to,550,No
 120,to,300,No
