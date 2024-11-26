@@ -144,7 +144,7 @@ def setting(file_setting):
           nhap=INput(int,'Nhập ',2)
           if nhap==1:
                System.Clear()
-               version='TVT_1.10'
+               version='TVT_2.0'
                print(f'\n\nVersion: {version}\n\n')
           elif nhap==2:
                print(f'''
