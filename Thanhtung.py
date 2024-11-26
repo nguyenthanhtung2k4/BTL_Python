@@ -16,7 +16,7 @@ def menu4(file):
           print(f'{colorF}Số phòng\t Loại\t  Giá\t Trạng thái{RESETs}')
           for row in render:
                so=row['Số phòng']
-               loai=row['Loại']
+               loai=row['Loại'].upper()
                gia=row['Giá']
                status=row['Trạng thái']
                print(f'  {so}\t\t {loai}\t  {gia}\t {status}')
