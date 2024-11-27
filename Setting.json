@@ -5,11 +5,12 @@
         "Font_Color": "F8",
         "Back_Color": "B1",
         "Font_ERROR": "F2",
-        "Back_ERROR": "B5"
+        "Back_ERROR": "B5",
+        "Delay_logo": 0.05
     },
     "Delay": {
-        "Time_logo": 0.0025,
-        "Time_About": 0.025
+        "Time_logo": 0.05,
+        "Time_About": 0.05
     },
     "Tabale": {
         "Font": {

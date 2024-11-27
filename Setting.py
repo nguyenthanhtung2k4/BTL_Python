@@ -179,8 +179,8 @@ def setting(file_setting):
                elif nhap==6:
                     TableColor(file_setting,'Nhập màu Back_ERROR','Back','B0')
                elif nhap==7:
-                    logo=INput(int,'Nhập Delay_logo[0 Mac dinh]: ',2)
-                    about=INput(int,'Nhập Delay_About[0 Mac dinh]: ',2)
+                    logo=INput(float,'Nhập Delay_logo[0 Mac dinh]: ',2)
+                    about=INput(float,'Nhập Delay_About[0 Mac dinh]: ',2)
                     if logo==0:
                          logo=0.0025
                     elif about==0:
@@ -188,7 +188,8 @@ def setting(file_setting):
                     else:
                          with open(file_setting,'r')as file:
                               data=json.load(file)
-                              data['Setting']['Delay_logo']=logo
+                              data['Delay']['Time_logo']=logo
+                              data['Delay']['Time_About']=about
                               with open(file_setting,'w')as file:
                                    json.dump(data,file,indent=4)
                                    print(f'\n\nDelay_logo đã thay đ��i thành {nhap}\n\n')
