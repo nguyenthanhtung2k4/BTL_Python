@@ -23,3 +23,7 @@
 -    **18.**Setting
 -    **19.**About
 ## Các chức năng được xây dựng bởi sinh viên DNU: Nguyên Thanh Tùng | Lê Văn Vượng | Bùi Quang Tuấn
+
+# Tùng : 8,12,13,15,16,setting
+# Vuong: 3,11,6,10,17
+# Tuan: 1,2,5,7,9,14

@@ -62,7 +62,7 @@ if  __name__=='__main__':
      options={
           1: lambda: menu1(file_phong),
           2: lambda: menu2(file_phong),
-          3: lambda: menu3(file_phong), # cần nâng cấp thêm trước khi xóa cần xem phòng đó có ai thuêy chưa, nếu chưa thì xóa , không thì không xóa được.
+          3: lambda: menu3(file_phong), 
           4: lambda: menu4(file_phong),
           5: lambda: menu5(file_phong),
           6: lambda: menu6(file_Khach,file_phong),
@@ -75,8 +75,8 @@ if  __name__=='__main__':
           13: lambda: menu13(file_NhanVien,fomat_nhanVien),
           14: lambda: menu14(file_NhanVien),
           15: lambda: menu15(file_NhanVien,fomat_nhanVien),
-          16: lambda: menu16(file_NhanVien),# cần nâng cấp thêm chức năng xem tiền lương nhân viên trong file ..
-          17: lambda: menu17(file_phong,file_Khach), # cần nâng cấp vấn đề lưu lại lịch sử tính tổng số tiền một cách chính xác và hiểu quả hơn.
+          16: lambda: menu16(file_NhanVien),
+          17: lambda: menu17(file_phong,file_Khach), 
           18: lambda: setting(file_setting),
           19: lambda: About(),
      } 

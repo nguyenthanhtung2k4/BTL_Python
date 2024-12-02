@@ -9,8 +9,8 @@
         "Delay_logo": 0.05
     },
     "Delay": {
-        "Time_logo": 0.05,
-        "Time_About": 0.05
+        "Time_logo": 0.0025,
+        "Time_About": 0.025
     },
     "Tabale": {
         "Font": {
